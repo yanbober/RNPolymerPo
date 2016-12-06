@@ -1,7 +1,30 @@
+/*
+ * MIT License
+ *
+ * Copyright (c) 2016 yanbo
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+'use strict';
 /**
  * 进行定义请求Action类型
  */
-'use strict';
 
 //微信精选
 export const ACTION_WX_NEWS_PRE_FETCH = 'ACTION_WX_NEWS_PRE_FETCH';
@@ -10,30 +33,3 @@ export const ACTION_WX_NEWS_FETCH_ERROR = 'ACTION_WX_NEWS_FETCH_ERROR';
 
 //Home页top banner
 export const ACTION_HOME_BANNER_FETCHED = 'ACTION_HOME_BANNER_FETCHED';
-
-
-
-
-
-export const ACTION_MAIN_RECEIVED_CONFIG = 'ACTION_MAIN_RECEIVED_CONFIG';
-export const ACTION_MAIN_RECEIVED_RECOMMAND = 'ACTION_MAIN_RECEIVED_RECOMMAND';
-
-export const ACTION_RECOMMAND_LIST_LOADING_MORE = 'ACTION_RECOMMAND_LIST_LOADING_MORE';
-export const ACTION_RECOMMAND_LIST_RECEIVED = 'ACTION_RECOMMAND_LIST_RECEIVED';
-
-export const ACTION_TEMPLATE_LIST_START_LOAD = 'ACTION_TEMPLATE_LIST_START_LOAD';
-export const ACTION_TEMPLATE_LIST_RECEIVED = 'ACTION_TEMPLATE_LIST_RECEIVED';
-
-export const ACTION_RECEIVED_ACCOUNT_CREDITS = 'ACTION_RECEIVED_ACCOUNT_CREDITS';
-export const ACTION_GOOGLE_PAY_INITED = 'ACTION_GOOGLE_PAY_INITED';
-export const ACTION_CHARGE_GET_ACCOUNT = 'ACTION_CHARGE_GET_ACCOUNT';
-
-export const ACTION_USE_TEMPLATE_LOADING = 'ACTION_USE_TEMPLATE_LOADING';
-export const ACTION_USE_TEMPLATE_RECHARGE = 'ACTION_USE_TEMPLATE_RECHARGE';
-export const ACTION_USE_TEMPLATE_PURCHASE = 'ACTION_USE_TEMPLATE_PURCHASE';
-export const ACTION_USE_TEMPLATE_GET_ACCOUNT = 'ACTION_USE_TEMPLATE_GET_ACCOUNT';
-
-export const ACTION_MINE_ACCOUNT_CREDITS = 'ACTION_MINE_ACCOUNT_CREDITS';
-export const ACTION_MINE_GET_ACCOUNT = 'ACTION_MINE_GET_ACCOUNT';
-export const ACTION_MINE_GET_TEMPLATES = 'ACTION_MINE_GET_TEMPLATES';
-export const ACTION_MINE_GET_PURCHASES = 'ACTION_MINE_GET_PURCHASES';
