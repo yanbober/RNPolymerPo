@@ -1,0 +1,3 @@
+rootProject.name = 'RNPolymerPo'
+
+include ':app'
