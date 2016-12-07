@@ -33,10 +33,10 @@ import {
 } from 'react-native';
 import NavigatorRoute from './../common/NavigatorRoute';
 /**
- * splash页面（简单模拟闪屏广告）
- * 核心知识点：使用React Native的传统state传递倒计时
+ * 反馈聊天界面（接入图灵机器人部分功能）
+ * 核心知识点：React Native 混合布局及交互的处理技巧
  */
-export default class SplashScene extends Component {
+export default class FeedChartScene extends Component {
   static propTypes = {
     navigator: React.PropTypes.object.isRequired,
     route: React.PropTypes.object.isRequired,

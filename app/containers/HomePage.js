@@ -104,7 +104,7 @@ class HomePage extends Component {
         onPress={this._categoryItemPressed.bind(null, category.key)}
         background={TouchableNativeFeedback.SelectableBackground()}>
         <View style={styles.categoryGridItem}>
-          <Image style={{width: 32, height: 32, backgroundColor: '#e9e9e9',}}
+          <Image style={{width: 32, height: 32,}}
             source={{uri: category.icon_url}}/>
           <Text style={{color: '#898989', fontSize: 12,}}>{category.title}</Text>
         </View>
@@ -115,14 +115,18 @@ class HomePage extends Component {
   _renderWanNianLiInfo(wanNianLiInfo) {
     if (wanNianLiInfo) {
       return (
-        <View style={{flex:1}}>
-          <Text>{wanNianLiInfo.date}</Text>
-          <Text>{wanNianLiInfo.lunar}</Text>
-          <Text>{wanNianLiInfo.lunarYear}</Text>
-          <Text>{wanNianLiInfo.animalsYear}</Text>
-          <Text>{wanNianLiInfo.weekday}</Text>
-          <Text>{wanNianLiInfo.avoid}</Text>
-          <Text>{wanNianLiInfo.suit}</Text>
+        <View style={styles.wanNianLiContainer}>
+          <View style={styles.dateContainer}>
+            <Text style={styles.dateText}>
+              {wanNianLiInfo.date} {wanNianLiInfo.weekday}
+            </Text>
+            <Text style={styles.dateText}>
+              {wanNianLiInfo.lunarYear} {wanNianLiInfo.lunar} ({wanNianLiInfo.animalsYear})
+            </Text>
+          </View>
+          <Text>忌：{wanNianLiInfo.avoid}</Text>
+          <Text>宜：{wanNianLiInfo.suit}</Text>
+          <Text>{wanNianLiInfo.desc}</Text>
         </View>
       );
     }
@@ -170,6 +174,7 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     marginRight: 5,
     marginBottom: 10,
+    marginTop: 10,
   },
 
   categoryGridItem: {
@@ -178,5 +183,25 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: 5,
     paddingBottom: 5,
+  },
+
+  wanNianLiContainer: {
+    backgroundColor: 'white',
+    borderColor: '#dddddd',
+    borderStyle: null,
+    borderWidth: 0.5,
+    borderRadius: 2,
+    margin: 5,
+    padding: 5,
+  },
+
+  dateContainer: {
+    justifyContent:'space-between',
+    flexDirection: 'row',
+    marginBottom: 5,
+  },
+
+  dateText: {
+    fontSize: 15,
   },
 });

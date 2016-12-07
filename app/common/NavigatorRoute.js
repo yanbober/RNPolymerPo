@@ -28,6 +28,7 @@ import React, { Component } from 'react';
 // import TemplatePreviewScene from './../containers/TemplatePreviewScene';
 import WebViewScene from './../containers/WebViewScene';
 import MainScene from './../containers/MainScene';
+import FeedChartScene from './../containers/FeedChartScene';
 // import TemplateRecommandListScene from './../containers/TemplateRecommandListScene';
 // import TemplateMineScene from './../containers/TemplateMineScene';
 // import TemplateChargeScene from './../containers/TemplateChargeScene';
@@ -46,6 +47,12 @@ export default class NavigatorRoute extends Component {
     static replaceToMainScene(navigator) {
         navigator.replace({
             component: MainScene,
+        });
+    }
+
+    static pushToFeedChartScene(navigator) {
+        navigator.push({
+            component: FeedChartScene,
         });
     }
 

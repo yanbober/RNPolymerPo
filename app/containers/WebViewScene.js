@@ -51,16 +51,13 @@ class WebViewScene extends Component {
         let params = route.paramers;
         this.pushFrom = route.pushFrom;
         switch(this.pushFrom) {
-            case 'subject':
-                this.linkUrl = params.click_url;
-                this.titleName = params.title;
-                break;
-            case 'banner':
-                this.linkUrl = params.click_url;
-                break;
             case 'wxNews':
                 this.linkUrl = params.url;
                 this.titleName = params.title;
+                break;
+            case 'MinePage':
+                this.linkUrl = params.url;
+                this.titleName = params.name;
                 break;
             default:
                 return;
