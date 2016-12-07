@@ -25,10 +25,17 @@
 
 import { combineReducers } from 'redux';
 import { wxNews } from './WeiXinNewsReducer';
-import { homeTopBanner, } from './HomePageReducer';
+import {
+      homeTopBanner, 
+      homeNewsCategory, 
+      homeWanNianLi,
+} from './HomePageReducer';
 
 const rootReducer = combineReducers({
       wxNews,
       homeTopBanner,
+      homeNewsCategory,
+      homeWanNianLi,
 });
+
 export default rootReducer;

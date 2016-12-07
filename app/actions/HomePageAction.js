@@ -25,10 +25,13 @@
 
 import * as types from './ActionTypes';
 import { 
-    ACTION_HOME_BANNER_FETCHED,
     FAKE_BANNER_NET_DATA,
+    FAKE_NEWS_CATEGORY_NET_DATA,
+    APP_KEY_WAN_NIAN_LI,
+    URL_WAN_NIAN_LI,
 } from  '../common/Constants';
 import NetUtils from './../utils/NetUtils';
+import CommonUtils from './../utils/CommonUtils';
 
 export function fetchHomeTopBannerList() {
     return dispatch => {
@@ -36,5 +39,29 @@ export function fetchHomeTopBannerList() {
             type: types.ACTION_HOME_BANNER_FETCHED,
             bannerList: FAKE_BANNER_NET_DATA
         });
+    };
+}
+
+export function fetchHomeNewsCategoryList() {
+    return dispatch => {
+        dispatch({
+            type: types.ACTION_HOME_NEWS_CATEGORY_FETCHED,
+            newsCategoryList: FAKE_NEWS_CATEGORY_NET_DATA
+        });
+    };
+}
+
+export function fetchWanNianLiInfo() {
+    return dispatch => {
+        NetUtils.get(URL_WAN_NIAN_LI+'?key='+APP_KEY_WAN_NIAN_LI+'&date='+CommonUtils.dateFormat(new Date(), 'yyyy-M-d'))
+        .then(function (result) {
+            if (result.error_code == 0) {
+                dispatch({
+                    type: types.ACTION_WNL_FETCHED,
+                    wnlData: result.result.data,
+                });
+            }
+            
+        }, function () {})
     };
 }

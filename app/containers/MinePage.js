@@ -48,11 +48,12 @@ class MinePage extends Component {
       const { homeTopBanner } = this.props;
       return (
           <View style={styles.container}>
-              <ActionBar
-                title={"个人中心"}
-                actions={[{title: 'Mine', icon: require('./../res/icon_my_template.png'), show: 'always'}]}
-                onIconClicked={this._onIconClicked.bind(this)}
-              />
+            <ActionBar
+            title={"个人中心"}
+            actions={[{title: 'Mine', icon: require('./../res/icon_my_template.png'), show: 'always'}]}
+            onIconClicked={this._onIconClicked.bind(this)}
+            />
+            
             <TouchableNativeFeedback
                 background={TouchableNativeFeedback.SelectableBackground()}
                 onPress={this.props._itemPressed}>

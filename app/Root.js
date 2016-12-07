@@ -30,6 +30,8 @@ import NavigatorRoot from './containers/NavigatorRoot';
 /**
  * React Native入口主容器
  * 核心知识点：React Native Redux框架初始化及统管入口
+ * 
+ * https://www.materialpalette.com/deep-orange/orange
  */
 const store = configureStore();
 
@@ -39,6 +41,6 @@ export default class Root extends Component {
 			<Provider store={store}>
                <NavigatorRoot/>
             </Provider>
-		   )
+		   );
 	}
 }

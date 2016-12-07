@@ -38,14 +38,15 @@ import NavigatorRoute from './../common/NavigatorRoute';
  */
 export default class SplashScene extends Component {
   static propTypes = {
-      navigator: React.PropTypes.object.isRequired,
-      route: React.PropTypes.object.isRequired,
+    navigator: React.PropTypes.object.isRequired,
+    route: React.PropTypes.object.isRequired,
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      adSecondsCount: 5,
+      adSecondsCount: 3,  //广告闪屏倒计时
+      showAdMark: false,  //是否展示 ad 标识
     };
   }
 
@@ -58,8 +59,7 @@ export default class SplashScene extends Component {
           return;
         }
         this.setState({adSecondsCount: --this.state.adSecondsCount});
-      },
-    1000);
+      }, 1000);
   }
 
   componentWillUnmount() {
@@ -67,12 +67,16 @@ export default class SplashScene extends Component {
   }
 
   render() {
-      const { homeTopBanner } = this.props;
       return (
           <View style={styles.container}>
             <StatusBar  hidden={true}/>
             <Image style={styles.adImg}
-                source={{uri: 'http://img.zcool.cn/community/018f5255f959116ac7251df8af2a4d.jpg'}}/>
+              source={{uri: 'http://img.zcool.cn/community/018f5255f959116ac7251df8af2a4d.jpg'}}
+              onLoad={this._onLoadImg.bind(this)}>
+              <View style={styles.adMarkContainer}>
+                <Text style={styles.adMarkText}>{this.state.showAdMark ? 'AD' : ''}</Text>
+              </View>
+            </Image>
             <Text style={styles.secondsCounts}
               onPress={this._secondsCountsPressed.bind(this)}>
               {this.state.adSecondsCount + 'S >'}
@@ -91,6 +95,10 @@ export default class SplashScene extends Component {
   _secondsCountsPressed() {
     NavigatorRoute.replaceToMainScene(this.props.navigator);
   }
+
+  _onLoadImg() {
+    this.setState({showAdMark: true});
+  }
 }
 
 const styles = StyleSheet.create({
@@ -101,6 +109,22 @@ const styles = StyleSheet.create({
 
   adImg: {
     flex: 1,
+  },
+
+  adMarkContainer: {
+    margin: 20,
+    backgroundColor: 'white',
+    paddingLeft: 2,
+    paddingRight: 2,
+    borderColor: '#6fd177',
+    borderStyle: null,
+    borderWidth: 0.5,
+    borderRadius: 2,
+    width: 24,
+  },
+
+  adMarkText: {
+    color: '#6fd177',
   },
 
   secondsCounts: {

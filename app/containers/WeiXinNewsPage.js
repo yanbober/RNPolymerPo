@@ -62,7 +62,6 @@ class WeiXinNewsPage extends Component {
 
   render() {
       const { wxNews } = this.props;
-      console.log("----------------"+Array.from(wxNews.newsList).length);
       return (
           <View style={styles.container}>
               <ActionBar
@@ -76,6 +75,7 @@ class WeiXinNewsPage extends Component {
                 renderRow={this._renderListItemView.bind(this)}
                 onEndReached={ this._onEndReached.bind(this) }
                 renderFooter={ this._renderFooterView.bind(this) }
+                initialListSize={1}
               />
           </View>
       );

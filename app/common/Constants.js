@@ -30,6 +30,10 @@
 export const APP_KEY_WEIXIN_NEWS = '0a2428e615fbf9040125cb135cc5987b';  
 export const URL_WEIXIN_NEWS = 'http://v.juhe.cn/weixin/query';
 
+//万年历
+export const APP_KEY_WAN_NIAN_LI = '5a9a1cd663013c456120fd6fdc9883cb';
+export const URL_WAN_NIAN_LI = 'http://japi.juhe.cn/calendar/day';
+
 //Home页top banner数据（网络没有接口，只能本地模拟造假）
 export const FAKE_BANNER_NET_DATA =[{
         id: 1234567890,
@@ -48,5 +52,58 @@ export const FAKE_BANNER_NET_DATA =[{
         img_url: 'http://zxpic.gtimg.com/infonew/0/wechat_pics_-7968826.jpg/640',
         title: '绝世限量版跑车',
         click_url: 'http://v.juhe.cn/weixin/redirect?wid=wechat_20160905046549'
+    },
+];
+
+//Home页news分类列表（网络没有接口，只能本地模拟造假）
+export const FAKE_NEWS_CATEGORY_NET_DATA =[{
+        key: 'top',
+        title: '头条',
+        icon_url: 'http://v.juhe.cn/weixin/redirect?wid=wechat_20160905052928'
+    },
+    {
+        key: 'shehui',
+        title: '社会',
+        icon_url: 'http://v.juhe.cn/weixin/redirect?wid=wechat_20160905052928'
+    },
+    {
+        key: 'guonei',
+        title: '国内',
+        icon_url: 'http://v.juhe.cn/weixin/redirect?wid=wechat_20160905052928'
+    },
+    {
+        key: 'guoji',
+        title: '国际',
+        icon_url: 'http://v.juhe.cn/weixin/redirect?wid=wechat_20160905052928'
+    },
+    {
+        key: 'yule',
+        title: '娱乐',
+        icon_url: 'http://v.juhe.cn/weixin/redirect?wid=wechat_20160905052928'
+    },
+    {
+        key: 'tiyu',
+        title: '体育',
+        icon_url: 'http://v.juhe.cn/weixin/redirect?wid=wechat_20160905052928'
+    },
+    {
+        key: 'junshi',
+        title: '军事',
+        icon_url: 'http://v.juhe.cn/weixin/redirect?wid=wechat_20160905052928'
+    },
+    {
+        key: 'keji',
+        title: '科技',
+        icon_url: 'http://v.juhe.cn/weixin/redirect?wid=wechat_20160905052928'
+    },
+    {
+        key: 'caijing',
+        title: '财经',
+        icon_url: 'http://v.juhe.cn/weixin/redirect?wid=wechat_20160905052928'
+    },
+    {
+        key: 'shishang',
+        title: '时尚',
+        icon_url: 'http://v.juhe.cn/weixin/redirect?wid=wechat_20160905052928'
     },
 ];

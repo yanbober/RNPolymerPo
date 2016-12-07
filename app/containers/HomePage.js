@@ -31,70 +31,105 @@ import {
   TouchableNativeFeedback,
   ActivityIndicator,
   StyleSheet,
+  Dimensions,
 } from 'react-native';
 import { connect } from 'react-redux';
 import ActionBar from './../components/ActionBar';
-import { fetchHomeTopBannerList } from '../actions/HomePageAction';
+import { 
+  fetchHomeTopBannerList,
+  fetchHomeNewsCategoryList,
+  fetchWanNianLiInfo,
+} from '../actions/HomePageAction';
 import NavigatorRoute from './../common/NavigatorRoute';
-
-//import Swiper from 'react-native-swiper';
+import Swiper from 'react-native-swiper';
+import GridView from './../components/GridView';
 /**
  * 主界面
+ * 核心知识点：react-native-swiper第三方底部导航栏的使用及封装学习
+ *            以源码形式引入的GridView学习
+ *            使用React Native Redux框架进行交互封装
+ *            Dimensions的灵活使用
  */
+const { width, height } = Dimensions.get('window');
+
 class HomePage extends Component {
   static propTypes = {
-      navigator: React.PropTypes.object.isRequired,
-      route: React.PropTypes.object.isRequired,
+    navigator: React.PropTypes.object.isRequired,
+    route: React.PropTypes.object.isRequired,
   };
-
-    componentDidMount() {
-        this.props.dispatch(fetchHomeTopBannerList());		
-    }
-/**
- 
-<Swiper
-                height={200}
-                index={0}
-                autoplay={homeTopBanner.bannerList.length > 1}
-                autoplayTimeout={3}
-                horizontal={true}
-                paginationStyle={{bottom: 5, left: null, right: 10,}}>
-                {this._renderSwiperItemView.bind(this, homeTopBanner.bannerList)}
-            </Swiper>
-
- */
-  render() {
-      const { homeTopBanner } = this.props;
-      return (
-          <View style={styles.container}>
-              <ActionBar
-                title={"RN聚合宝"}
-                actions={[{title: 'Mine', icon: require('./../res/icon_my_template.png'), show: 'always'}]}
-                onIconClicked={this._onIconClicked.bind(this)}
-              />
-            
-          </View>
-      );
+  
+  componentDidMount() {
+    this.props.dispatch(fetchHomeTopBannerList());
+    this.props.dispatch(fetchHomeNewsCategoryList());
+    this.props.dispatch(fetchWanNianLiInfo());
   }
 
-  _renderSwiperItemView(bannerList) {
-    let bannerItems = [];
-    if (bannerList) {
-        for (let index=0; index<bannerList.length; index++) {
-            let bannerBean = bannerList[index];
-            if (bannerBean) {
-                bannerItems.push(
-                    <TouchableOpacity
-                        activeOpacity={0.9}
-                        onPress={this._bannerPressed.bind(null, bannerBean)}>
-                        <Image style={Styles.bannerImg}
-                        source={{uri: bannerBean.img_url}}/>
-                    </TouchableOpacity>
-                );
-            }
-        }
+  render() {
+    const { homeTopBanner, homeNewsCategory, homeWanNianLi } = this.props;
+    return (
+      <View style={styles.container}>
+        <ActionBar
+          title={"RN聚合宝"}
+          actions={[{title: 'Mine', icon: require('./../res/icon_my_template.png'), show: 'always'}]}
+          onIconClicked={this._onIconClicked.bind(this)}/>
+        <Swiper
+          height={150}
+          autoplay={true}
+          autoplayTimeout={3}
+          horizontal={true}
+          paginationStyle={{bottom: 5, left: null, right: 10,}}>
+          {
+            homeTopBanner.bannerList.map((banner, i) => <View key={i} style={{flex: 1}}>
+              <TouchableNativeFeedback>
+                <Image style={styles.bannerImg} source={{ uri: banner.img_url}} />
+              </TouchableNativeFeedback>
+            </View>)
+          }
+        </Swiper>
+        <View style={styles.newsCategoryContainer}> 
+          <GridView
+            items={Array.from(homeNewsCategory.newsCategoryList)}
+            itemsPerRow={5}
+            renderItem={this._renderNewsCategoryItem.bind(this)}/>
+       </View>
+       {this._renderWanNianLiInfo(homeWanNianLi.wnlData)}
+      </View>
+    );
+  }
+
+  _renderNewsCategoryItem(category) {
+    return (
+      <TouchableNativeFeedback
+        key={category.key}
+        onPress={this._categoryItemPressed.bind(null, category.key)}
+        background={TouchableNativeFeedback.SelectableBackground()}>
+        <View style={styles.categoryGridItem}>
+          <Image style={{width: 32, height: 32, backgroundColor: '#e9e9e9',}}
+            source={{uri: category.icon_url}}/>
+          <Text style={{color: '#898989', fontSize: 12,}}>{category.title}</Text>
+        </View>
+      </TouchableNativeFeedback>
+    );
+  }
+
+  _renderWanNianLiInfo(wanNianLiInfo) {
+    if (wanNianLiInfo) {
+      return (
+        <View style={{flex:1}}>
+          <Text>{wanNianLiInfo.date}</Text>
+          <Text>{wanNianLiInfo.lunar}</Text>
+          <Text>{wanNianLiInfo.lunarYear}</Text>
+          <Text>{wanNianLiInfo.animalsYear}</Text>
+          <Text>{wanNianLiInfo.weekday}</Text>
+          <Text>{wanNianLiInfo.avoid}</Text>
+          <Text>{wanNianLiInfo.suit}</Text>
+        </View>
+      );
     }
-    return bannerItems;
+  }
+
+  _categoryItemPressed(key) {
+
   }
 
   _bannerPressed(bannerBean) {
@@ -111,9 +146,11 @@ class HomePage extends Component {
 }
 
 function mapStateToProps(state) {
-  const { homeTopBanner } = state;
+  const { homeTopBanner, homeNewsCategory, homeWanNianLi } = state;
   return {
     homeTopBanner,
+    homeNewsCategory,
+    homeWanNianLi,
   }
 }
 export default connect(mapStateToProps)(HomePage);
@@ -124,14 +161,22 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
   },
 
-  listview: {
+  bannerImg: {
     flex: 1,
-    padding: 5,
+    backgroundColor: '#e9e9e9',
   },
 
-  bannerImg: {
-    width: 700, 
-    height: 150,
-    backgroundColor: '#e9e9e9',
-  }
+  newsCategoryContainer: {
+    marginLeft: 5,
+    marginRight: 5,
+    marginBottom: 10,
+  },
+
+  categoryGridItem: {
+    width: (width - 5 * 2) / 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingTop: 5,
+    paddingBottom: 5,
+  },
 });
