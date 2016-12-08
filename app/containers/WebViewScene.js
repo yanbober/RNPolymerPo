@@ -59,6 +59,10 @@ class WebViewScene extends Component {
                 this.linkUrl = params.url;
                 this.titleName = params.name;
                 break;
+            case 'buyMovies':
+                this.linkUrl = params.url;
+                this.titleName = params.title;
+                break;
             default:
                 return;
         }

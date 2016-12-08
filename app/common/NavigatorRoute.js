@@ -29,6 +29,7 @@ import React, { Component } from 'react';
 import WebViewScene from './../containers/WebViewScene';
 import MainScene from './../containers/MainScene';
 import FeedChartScene from './../containers/FeedChartScene';
+import NewsCategoryListScene from './../containers/NewsCategoryListScene';
 // import TemplateRecommandListScene from './../containers/TemplateRecommandListScene';
 // import TemplateMineScene from './../containers/TemplateMineScene';
 // import TemplateChargeScene from './../containers/TemplateChargeScene';
@@ -53,6 +54,14 @@ export default class NavigatorRoute extends Component {
     static pushToFeedChartScene(navigator) {
         navigator.push({
             component: FeedChartScene,
+        });
+    }
+
+    static pushToNewsCategoryListScene(navigator, categories, curKey) {
+        navigator.push({
+            component: NewsCategoryListScene,
+            curKey: curKey,
+            categories: categories,
         });
     }
 

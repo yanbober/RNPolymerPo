@@ -27,7 +27,9 @@ import React, { Component } from 'react';
 import {
   View,
   Image,
+  Text,
   StyleSheet,
+  Dimensions,
 } from 'react-native';
 import NetUtils from './../utils/NetUtils';
 import ActionBar from './../components/ActionBar';
@@ -42,6 +44,8 @@ import MinePage from './MinePage';
  * 核心知识点：使用React Native Redux框架管理
  *            react-native-tab-navigator第三方底部导航栏的使用及封装学习
  */
+const { width, height } = Dimensions.get('window');
+
 class MainScene extends Component {
   static propTypes = {
       navigator: React.PropTypes.object.isRequired,
@@ -62,7 +66,7 @@ class MainScene extends Component {
   render() {
     const {mainPage} = this.props;
     return (
-      <View style={Styles.container}>
+      <View style={styles.container}>
         <TabNavigator tabBarStyle={{ backgroundColor:'white' }} style={{backgroundColor: 'white'}}>
           <TabNavigator.Item
             title="RN主页"
@@ -95,8 +99,17 @@ class MainScene extends Component {
               route={this.props.route}/>
           </TabNavigator.Item>
         </TabNavigator>
+        <View style={styles.floatMenu}>
+          <Image style={{width: 50, height: 50}} 
+            source={require('./../res/ic_float_movies.png')}
+            onPress={this._buyMoviesTicks.bind(this)}/>
+        </View>
       </View>
     );
+  }
+
+  _buyMoviesTicks() {
+    NavigatorRoute.pushToWebViewScene(this.props.navigator, 'buyMovies', {url: 'http://m.wepiao.com/', title: '我要看电影'});
   }
 }
 
@@ -108,9 +121,16 @@ function mapStateToProps(state) {
 }
 export default connect(mapStateToProps)(MainScene);
 
-const Styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#ffffff',
   },
+
+  floatMenu: {
+    position: 'absolute',
+    left: width - 70,
+    top: height - 120,
+    flex: 1,
+  }
 });

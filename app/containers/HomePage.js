@@ -101,7 +101,7 @@ class HomePage extends Component {
     return (
       <TouchableNativeFeedback
         key={category.key}
-        onPress={this._categoryItemPressed.bind(null, category.key)}
+        onPress={this._categoryItemPressed.bind(this, category.key)}
         background={TouchableNativeFeedback.SelectableBackground()}>
         <View style={styles.categoryGridItem}>
           <Image style={{width: 32, height: 32,}}
@@ -132,8 +132,10 @@ class HomePage extends Component {
     }
   }
 
-  _categoryItemPressed(key) {
-
+  _categoryItemPressed(pressedKey) {
+    const { homeNewsCategory } = this.props;
+    NavigatorRoute.pushToNewsCategoryListScene(this.props.navigator, 
+                      homeNewsCategory.newsCategoryList, pressedKey);
   }
 
   _bannerPressed(bannerBean) {
