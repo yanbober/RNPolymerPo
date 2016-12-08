@@ -41,7 +41,7 @@ import NavigatorRoute from './../common/NavigatorRoute';
 /**
  * 微信精选列表（上拉分页加载）
  * 核心知识点：上拉分页加载更多的ListView
- * https://www.juhe.cn/docs/api/id/147
+ * http://apistore.baidu.com/apiworks/servicedetail/632.html
  */
 const pageLimit = 10;
 

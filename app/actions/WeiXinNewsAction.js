@@ -46,8 +46,12 @@ export function fetchNewsListByPage(start, pageLimit) {
                     pageLimit: pageLimit,
                     isLoadingMore: false
                 });
+            } else {
+                dispatch({
+                type: types.ACTION_WX_NEWS_FETCH_ERROR,
+                isLoadingMore: false
+            });
             }
-            
         }, function () {
             dispatch({
                 type: types.ACTION_WX_NEWS_FETCH_ERROR,

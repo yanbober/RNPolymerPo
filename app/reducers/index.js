@@ -30,12 +30,14 @@ import {
       homeNewsCategory, 
       homeWanNianLi,
 } from './HomePageReducer';
+import { robotChart } from './FeedChartReducer';
 
 const rootReducer = combineReducers({
       wxNews,
       homeTopBanner,
       homeNewsCategory,
       homeWanNianLi,
+      robotChart,
 });
 
 export default rootReducer;

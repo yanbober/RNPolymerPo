@@ -54,7 +54,7 @@ export default class ActionBar extends Component {
     render() {
         return (
             <View>
-                <StatusBar  backgroundColor='#e64a19'
+                <StatusBar  backgroundColor='#0288d1'
                     hidden={false}/>
                 <ToolbarAndroid
                     style={styles.toolbar}
@@ -71,7 +71,7 @@ export default class ActionBar extends Component {
 
 const styles = StyleSheet.create({
     toolbar: {
-        backgroundColor: '#ff5722',
+        backgroundColor: '#03a9f4',
         height: 56,
     },
 });
