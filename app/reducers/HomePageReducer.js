@@ -68,3 +68,18 @@ export function homeWanNianLi(state = initWnlState, action) {
             return state;
     }
 }
+
+const initMoviesState = {
+    moviesResult: undefined,
+}
+
+export function homeRecentMovies(state = initMoviesState, action) {
+    switch (action.type) {
+        case types.ACTION_RECENT_MOVIES_FETCHED:
+            return Object.assign({}, state, {
+                    moviesResult: action.moviesResult
+                });
+        default:
+            return state;
+    }
+}

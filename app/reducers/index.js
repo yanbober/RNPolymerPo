@@ -29,6 +29,7 @@ import {
       homeTopBanner, 
       homeNewsCategory, 
       homeWanNianLi,
+      homeRecentMovies,
 } from './HomePageReducer';
 import { robotChart } from './FeedChartReducer';
 
@@ -37,6 +38,7 @@ const rootReducer = combineReducers({
       homeTopBanner,
       homeNewsCategory,
       homeWanNianLi,
+      homeRecentMovies,
       robotChart,
 });
 

@@ -29,6 +29,8 @@ import {
     FAKE_NEWS_CATEGORY_NET_DATA,
     APP_KEY_WAN_NIAN_LI,
     URL_WAN_NIAN_LI,
+    APP_RECENT_MOVIES,
+    URL_RECENT_MOVIES,
 } from  '../common/Constants';
 import NetUtils from './../utils/NetUtils';
 import CommonUtils from './../utils/CommonUtils';
@@ -59,6 +61,21 @@ export function fetchWanNianLiInfo() {
                 dispatch({
                     type: types.ACTION_WNL_FETCHED,
                     wnlData: result.result.data,
+                });
+            }
+            
+        }, function () {})
+    };
+}
+
+export function fetchRecentMoviesList(city) {
+    return dispatch => {
+        NetUtils.get(URL_RECENT_MOVIES+'?dtype=json&key='+APP_RECENT_MOVIES+'&city='+city)
+        .then(function (result) {
+            if (result.error_code == 0) {
+                dispatch({
+                    type: types.ACTION_RECENT_MOVIES_FETCHED,
+                    moviesResult: result.result,
                 });
             }
             

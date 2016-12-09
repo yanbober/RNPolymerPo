@@ -190,7 +190,7 @@ export default connect(mapStateToProps)(MinePage);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ffffff',
+    backgroundColor: '#f7f7f7',
   },
 
   iconContainer: {
@@ -227,10 +227,10 @@ const styles = StyleSheet.create({
   },
 
   pressItemContainer: {
-    paddingTop: 10,
-    paddingBottom: 10,
+    padding: 10,
     justifyContent:'space-between',
     flexDirection: 'row',
+    backgroundColor: 'white',
   },
 
   pressItemText: {

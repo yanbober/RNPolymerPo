@@ -123,7 +123,7 @@ export default connect(mapStateToProps)(NewsCategoryListScene);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ffffff',
+    backgroundColor: '#f7f7f7',
   },
 
   listview: {

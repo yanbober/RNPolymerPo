@@ -26,10 +26,9 @@
 import React, { Component } from 'react';
 import {
   View,
-  Image,
   Text,
+  Image,
   StyleSheet,
-  Dimensions,
 } from 'react-native';
 import NetUtils from './../utils/NetUtils';
 import ActionBar from './../components/ActionBar';
@@ -44,8 +43,6 @@ import MinePage from './MinePage';
  * 核心知识点：使用React Native Redux框架管理
  *            react-native-tab-navigator第三方底部导航栏的使用及封装学习
  */
-const { width, height } = Dimensions.get('window');
-
 class MainScene extends Component {
   static propTypes = {
       navigator: React.PropTypes.object.isRequired,
@@ -69,7 +66,7 @@ class MainScene extends Component {
       <View style={styles.container}>
         <TabNavigator tabBarStyle={{ backgroundColor:'white' }} style={{backgroundColor: 'white'}}>
           <TabNavigator.Item
-            title="RN主页"
+            title="生活资讯圈"
             selected={this.state.selectedTab === 'home'}
             renderIcon={() => <Image source={require('./../res/ic_arrow_back_white_24dp.png')} />}
             renderSelectedIcon={() => <Image source={require('./../res/ic_arrow_back_white_24dp.png')} />}
@@ -79,7 +76,7 @@ class MainScene extends Component {
               route={this.props.route}/>
           </TabNavigator.Item>
           <TabNavigator.Item
-            title="RN上拉更多"
+            title="乐逗放松"
             selected={this.state.selectedTab === 'profile'}
             renderIcon={() => <Image source={require('./../res/ic_arrow_back_white_24dp.png')} />}
             renderSelectedIcon={() => <Image source={require('./../res/ic_arrow_back_white_24dp.png')} />}
@@ -89,7 +86,7 @@ class MainScene extends Component {
               route={this.props.route}/>
           </TabNavigator.Item>
           <TabNavigator.Item
-            title="其他杂项"
+            title="RN 技术圈"
             selected={this.state.selectedTab === 'aaaaa'}
             renderIcon={() => <Image source={require('./../res/ic_arrow_back_white_24dp.png')} />}
             renderSelectedIcon={() => <Image source={require('./../res/ic_arrow_back_white_24dp.png')} />}
@@ -99,17 +96,8 @@ class MainScene extends Component {
               route={this.props.route}/>
           </TabNavigator.Item>
         </TabNavigator>
-        <View style={styles.floatMenu}>
-          <Image style={{width: 50, height: 50}} 
-            source={require('./../res/ic_float_movies.png')}
-            onPress={this._buyMoviesTicks.bind(this)}/>
-        </View>
       </View>
     );
-  }
-
-  _buyMoviesTicks() {
-    NavigatorRoute.pushToWebViewScene(this.props.navigator, 'buyMovies', {url: 'http://m.wepiao.com/', title: '我要看电影'});
   }
 }
 
@@ -124,13 +112,6 @@ export default connect(mapStateToProps)(MainScene);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ffffff',
+    backgroundColor: '#f7f7f7',
   },
-
-  floatMenu: {
-    position: 'absolute',
-    left: width - 70,
-    top: height - 120,
-    flex: 1,
-  }
 });

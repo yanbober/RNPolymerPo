@@ -38,6 +38,10 @@ export const URL_WAN_NIAN_LI = 'http://japi.juhe.cn/calendar/day';
 export const APP_KEY_TULING_ROBOT = '49fbd37b1c98c4b760197222d2268e4b';
 export const URL_TULING_ROBOT = 'http://op.juhe.cn/robot/index';
 
+//最近影讯
+export const APP_RECENT_MOVIES = '37621eeefd05cde6bf0e4aa8c1516b11';
+export const URL_RECENT_MOVIES = 'http://op.juhe.cn/onebox/movie/pmovie';
+
 //Home页top banner数据（网络没有接口，只能本地模拟造假）
 export const FAKE_BANNER_NET_DATA =[{
         id: 1234567890,

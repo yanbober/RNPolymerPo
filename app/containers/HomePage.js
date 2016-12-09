@@ -39,6 +39,7 @@ import {
   fetchHomeTopBannerList,
   fetchHomeNewsCategoryList,
   fetchWanNianLiInfo,
+  fetchRecentMoviesList,
 } from '../actions/HomePageAction';
 import NavigatorRoute from './../common/NavigatorRoute';
 import Swiper from 'react-native-swiper';
@@ -49,6 +50,7 @@ import GridView from './../components/GridView';
  *            以源码形式引入的GridView学习
  *            使用React Native Redux框架进行交互封装
  *            Dimensions的灵活使用
+ *            ListView各种使用姿势
  */
 const { width, height } = Dimensions.get('window');
 
@@ -62,10 +64,11 @@ class HomePage extends Component {
     this.props.dispatch(fetchHomeTopBannerList());
     this.props.dispatch(fetchHomeNewsCategoryList());
     this.props.dispatch(fetchWanNianLiInfo());
+    this.props.dispatch(fetchRecentMoviesList('珠海'));
   }
 
   render() {
-    const { homeTopBanner, homeNewsCategory, homeWanNianLi } = this.props;
+    const { homeTopBanner, homeNewsCategory, homeWanNianLi, homeRecentMovies } = this.props;
     return (
       <View style={styles.container}>
         <ActionBar
@@ -80,7 +83,7 @@ class HomePage extends Component {
           paginationStyle={{bottom: 5, left: null, right: 10,}}>
           {
             homeTopBanner.bannerList.map((banner, i) => <View key={i} style={{flex: 1}}>
-              <TouchableNativeFeedback>
+              <TouchableNativeFeedback onPress={this._pressedBannerItem.bind(this, banner)}>
                 <Image style={styles.bannerImg} source={{ uri: banner.img_url}} />
               </TouchableNativeFeedback>
             </View>)
@@ -93,6 +96,12 @@ class HomePage extends Component {
             renderItem={this._renderNewsCategoryItem.bind(this)}/>
        </View>
        {this._renderWanNianLiInfo(homeWanNianLi.wnlData)}
+
+        <Text style={styles.floatMenu}
+          onPress={this._buyMoviesTicks.bind(this)}>
+          <Image style={{width: 75, height: 75}} 
+            source={require('./../res/ic_float_movies.png')}/>
+        </Text>
       </View>
     );
   }
@@ -138,8 +147,12 @@ class HomePage extends Component {
                       homeNewsCategory.newsCategoryList, pressedKey);
   }
 
-  _bannerPressed(bannerBean) {
+  _buyMoviesTicks() {
+    NavigatorRoute.pushToWebViewScene(this.props.navigator, 'buyMovies', {url: 'http://m.wepiao.com/', title: '我要看电影'});
+  }
 
+  _pressedBannerItem(bannerBean) {
+    NavigatorRoute.pushToWebViewScene(this.props.navigator, 'homeBanner', bannerBean);
   }
 
   _itemPressed(wxNewsBean) {
@@ -152,11 +165,12 @@ class HomePage extends Component {
 }
 
 function mapStateToProps(state) {
-  const { homeTopBanner, homeNewsCategory, homeWanNianLi } = state;
+  const { homeTopBanner, homeNewsCategory, homeWanNianLi, homeRecentMovies } = state;
   return {
     homeTopBanner,
     homeNewsCategory,
     homeWanNianLi,
+    homeRecentMovies,
   }
 }
 export default connect(mapStateToProps)(HomePage);
@@ -164,7 +178,7 @@ export default connect(mapStateToProps)(HomePage);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ffffff',
+    backgroundColor: '#f7f7f7',
   },
 
   bannerImg: {
@@ -205,5 +219,12 @@ const styles = StyleSheet.create({
 
   dateText: {
     fontSize: 15,
+  },
+
+  floatMenu: {
+    position: 'absolute',
+    left: width - 90,
+    top: height - 150,
+    flex: 1,
   },
 });
