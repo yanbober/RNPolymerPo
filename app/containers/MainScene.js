@@ -35,13 +35,12 @@ import ActionBar from './../components/ActionBar';
 import { connect } from 'react-redux';
 import NavigatorRoute from './../common/NavigatorRoute';
 import TabNavigator from 'react-native-tab-navigator'
-import WeiXinNewsPage from './WeiXinNewsPage';
 import HomePage from './HomePage';
 import MinePage from './MinePage';
 /**
  * 主容器界面
  * 核心知识点：使用React Native Redux框架管理
- *            react-native-tab-navigator第三方底部导航栏的使用及封装学习
+ *           react-native-tab-navigator第三方底部导航栏的使用及封装学习
  */
 class MainScene extends Component {
   static propTypes = {
@@ -66,30 +65,28 @@ class MainScene extends Component {
       <View style={styles.container}>
         <TabNavigator tabBarStyle={{ backgroundColor:'white' }} style={{backgroundColor: 'white'}}>
           <TabNavigator.Item
-            title="生活资讯圈"
+            title="潮流生活"
             selected={this.state.selectedTab === 'home'}
-            renderIcon={() => <Image source={require('./../res/ic_arrow_back_white_24dp.png')} />}
-            renderSelectedIcon={() => <Image source={require('./../res/ic_arrow_back_white_24dp.png')} />}
+            renderIcon={() => <Image source={require('./../res/ic_category_hot.png')} />}
+            renderSelectedIcon={() => <Image source={require('./../res/ic_category_hot.png')} />}
             onPress={() => this.setState({ selectedTab: 'home' })}>
             <HomePage
               navigator={this.props.navigator}
               route={this.props.route}/>
           </TabNavigator.Item>
           <TabNavigator.Item
-            title="乐逗放松"
+            title="驾照刷题"
             selected={this.state.selectedTab === 'profile'}
-            renderIcon={() => <Image source={require('./../res/ic_arrow_back_white_24dp.png')} />}
-            renderSelectedIcon={() => <Image source={require('./../res/ic_arrow_back_white_24dp.png')} />}
+            renderIcon={() => <Image source={require('./../res/ic_category_live.png')} />}
+            renderSelectedIcon={() => <Image source={require('./../res/ic_category_live.png')} />}
             onPress={() => this.setState({ selectedTab: 'profile' })}>
-            <WeiXinNewsPage
-              navigator={this.props.navigator}
-              route={this.props.route}/>
+            <View/>
           </TabNavigator.Item>
           <TabNavigator.Item
-            title="RN 技术圈"
+            title="个人中心"
             selected={this.state.selectedTab === 'aaaaa'}
-            renderIcon={() => <Image source={require('./../res/ic_arrow_back_white_24dp.png')} />}
-            renderSelectedIcon={() => <Image source={require('./../res/ic_arrow_back_white_24dp.png')} />}
+            renderIcon={() => <Image source={require('./../res/ic_category_energy.png')} />}
+            renderSelectedIcon={() => <Image source={require('./../res/ic_category_energy.png')} />}
             onPress={() => this.setState({ selectedTab: 'aaaaa' })}>
             <MinePage
               navigator={this.props.navigator}

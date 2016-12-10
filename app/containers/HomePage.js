@@ -28,6 +28,7 @@ import {
   Text,
   View,
   Image,
+  ListView,
   TouchableNativeFeedback,
   ActivityIndicator,
   StyleSheet,
@@ -44,6 +45,7 @@ import {
 import NavigatorRoute from './../common/NavigatorRoute';
 import Swiper from 'react-native-swiper';
 import GridView from './../components/GridView';
+import ItemOnLineMovieView from './../components/ItemOnLineMovieView';
 /**
  * 主界面
  * 核心知识点：react-native-swiper第三方底部导航栏的使用及封装学习
@@ -59,6 +61,13 @@ class HomePage extends Component {
     navigator: React.PropTypes.object.isRequired,
     route: React.PropTypes.object.isRequired,
   };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      dataSource: new ListView.DataSource({rowHasChanged: (row1, row2) => row1 !== row2}),
+    };
+  }
   
   componentDidMount() {
     this.props.dispatch(fetchHomeTopBannerList());
@@ -68,35 +77,20 @@ class HomePage extends Component {
   }
 
   render() {
-    const { homeTopBanner, homeNewsCategory, homeWanNianLi, homeRecentMovies } = this.props;
+    const { homeRecentMovies } = this.props;
     return (
       <View style={styles.container}>
         <ActionBar
-          title={"RN聚合宝"}
-          actions={[{title: 'Mine', icon: require('./../res/icon_my_template.png'), show: 'always'}]}
+          title={"潮流生活"}
           onIconClicked={this._onIconClicked.bind(this)}/>
-        <Swiper
-          height={150}
-          autoplay={true}
-          autoplayTimeout={3}
-          horizontal={true}
-          paginationStyle={{bottom: 5, left: null, right: 10,}}>
-          {
-            homeTopBanner.bannerList.map((banner, i) => <View key={i} style={{flex: 1}}>
-              <TouchableNativeFeedback onPress={this._pressedBannerItem.bind(this, banner)}>
-                <Image style={styles.bannerImg} source={{ uri: banner.img_url}} />
-              </TouchableNativeFeedback>
-            </View>)
-          }
-        </Swiper>
-        <View style={styles.newsCategoryContainer}> 
-          <GridView
-            items={Array.from(homeNewsCategory.newsCategoryList)}
-            itemsPerRow={5}
-            renderItem={this._renderNewsCategoryItem.bind(this)}/>
-       </View>
-       {this._renderWanNianLiInfo(homeWanNianLi.wnlData)}
-
+        <ListView
+          initialListSize={1}
+          enableEmptySections={true}
+          removeClippedSubviews={false}
+          dataSource={this.state.dataSource.cloneWithRows(homeRecentMovies.moviesResult === undefined ? [] : homeRecentMovies.moviesResult)}
+          renderRow={this._renderListItem.bind(this)}
+          renderHeader={this._renderHeaderView.bind(this)}
+          style={styles.listview}/>
         <Text style={styles.floatMenu}
           onPress={this._buyMoviesTicks.bind(this)}>
           <Image style={{width: 75, height: 75}} 
@@ -141,6 +135,43 @@ class HomePage extends Component {
     }
   }
 
+  _renderHeaderView() {
+    const { homeTopBanner, homeNewsCategory, homeWanNianLi } = this.props;
+    return (
+      <View style={{flex: 1}}>
+        <Swiper
+          height={150}
+          autoplay={true}
+          autoplayTimeout={3}
+          horizontal={true}
+          paginationStyle={{bottom: 5, left: null, right: 10,}}>
+          {
+            homeTopBanner.bannerList.map((banner, i) => <View key={i} style={{flex: 1}}>
+              <TouchableNativeFeedback onPress={this._pressedBannerItem.bind(this, banner)}>
+                <Image style={styles.bannerImg} source={{ uri: banner.img_url}} />
+              </TouchableNativeFeedback>
+            </View>)
+          }
+        </Swiper>
+        <View style={styles.newsCategoryContainer}> 
+          <GridView
+            items={Array.from(homeNewsCategory.newsCategoryList)}
+            itemsPerRow={5}
+            renderItem={this._renderNewsCategoryItem.bind(this)}/>
+       </View>
+       {this._renderWanNianLiInfo(homeWanNianLi.wnlData)}
+      </View>
+    );
+  }
+
+  _renderListItem(data) {
+    return (
+      <ItemOnLineMovieView key={data.tvTitle}
+        bean={data}
+        itemClicked={this._itemPressed.bind(this, data)}/>
+    );
+  }
+
   _categoryItemPressed(pressedKey) {
     const { homeNewsCategory } = this.props;
     NavigatorRoute.pushToNewsCategoryListScene(this.props.navigator, 
@@ -155,8 +186,8 @@ class HomePage extends Component {
     NavigatorRoute.pushToWebViewScene(this.props.navigator, 'homeBanner', bannerBean);
   }
 
-  _itemPressed(wxNewsBean) {
-    NavigatorRoute.pushToWebViewScene(this.props.navigator, 'wxNews', wxNewsBean);
+  _itemPressed(data) {
+    NavigatorRoute.pushToWebViewScene(this.props.navigator, 'onLineMovie', {name: data.tvTitle, url: data.m_iconlinkUrl});
   }
 
   _onIconClicked() {
@@ -225,6 +256,10 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: width - 90,
     top: height - 150,
+    flex: 1,
+  },
+
+  listview: {
     flex: 1,
   },
 });

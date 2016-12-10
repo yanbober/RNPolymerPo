@@ -26,9 +26,9 @@
  * 常量
  */
 
-//微信精选
-export const APP_KEY_WEIXIN_NEWS = '0a2428e615fbf9040125cb135cc5987b';  
-export const URL_WEIXIN_NEWS = 'http://v.juhe.cn/weixin/query';
+//在线新闻
+export const APP_KEY_ONLINE_NEWS = 'd1198f006ce1df5c45d6a0dade8d9b3a';  
+export const URL_ONLINE_NEWS = 'http://v.juhe.cn/toutiao/index';
 
 //万年历
 export const APP_KEY_WAN_NIAN_LI = '5a9a1cd663013c456120fd6fdc9883cb';

@@ -83,6 +83,10 @@ class WebViewScene extends Component {
                 this.linkUrl = params.click_url;
                 this.titleName = params.title;
                 break;
+            case 'onLineMovie':
+                this.linkUrl = params.url;
+                this.titleName = params.name;
+                break;
             default:
                 return;
         }

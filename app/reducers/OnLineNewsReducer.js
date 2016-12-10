@@ -22,41 +22,32 @@
  * SOFTWARE.
  */
 'use strict';
+import * as types from './../actions/ActionTypes';
 
-import * as types from './ActionTypes';
-import { 
-    APP_KEY_WEIXIN_NEWS,
-    URL_WEIXIN_NEWS,
-} from  '../common/Constants';
-import NetUtils from './../utils/NetUtils';
-
-export function fetchNewsListByPage(start, pageLimit) {
-    return dispatch => {
-        dispatch({
-            type: types.ACTION_WX_NEWS_PRE_FETCH,
-            isLoadingMore: true
-        });
-        NetUtils.get(URL_WEIXIN_NEWS+'?dtype=json&key='+APP_KEY_WEIXIN_NEWS+'&ps='+pageLimit+'&pno='+start)
-        .then(function (result) {
-            if (result.error_code == 0) {
-                dispatch({
-                    type: types.ACTION_WX_NEWS_FETCH_OK,
-                    newsList: result.result.list,
-                    start: start,
-                    pageLimit: pageLimit,
-                    isLoadingMore: false
+const initialState = {
+    state: 'pre_fetch',
+    newsList: [],
+}
+//复用state的技术点
+export function onLineNews(state = [], action) {
+    switch (action.type) {
+        case types.ACTION_ONLINE_NEWS_PRE_FETCH:
+            return Object.assign({}, state, {[action.categoryKey]: Object.assign({}, state[action.categoryKey], {
+                    state: action.state
+                    })
                 });
-            } else {
-                dispatch({
-                type: types.ACTION_WX_NEWS_FETCH_ERROR,
-                isLoadingMore: false
-            });
-            }
-        }, function () {
-            dispatch({
-                type: types.ACTION_WX_NEWS_FETCH_ERROR,
-                isLoadingMore: false
-            });
-        })
-    };
+        case types.ACTION_ONLINE_NEWS_FETCH_OK:
+            return Object.assign({}, state, {[action.categoryKey]: Object.assign({}, state[action.categoryKey], {
+                    newsList: action.newsList,
+                    state: action.state,
+                    })
+                });
+        case types.ACTION_ONLINE_NEWS_FETCH_ERROR:
+            return Object.assign({}, state, {[action.categoryKey]: Object.assign({}, state[action.categoryKey], {
+                    state: action.state
+                    })
+                });
+        default:
+            return state;
+    }
 }

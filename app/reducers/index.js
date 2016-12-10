@@ -24,7 +24,7 @@
 'use strict';
 
 import { combineReducers } from 'redux';
-import { wxNews } from './WeiXinNewsReducer';
+import { onLineNews } from './OnLineNewsReducer';
 import {
       homeTopBanner, 
       homeNewsCategory, 
@@ -34,7 +34,7 @@ import {
 import { robotChart } from './FeedChartReducer';
 
 const rootReducer = combineReducers({
-      wxNews,
+      onLineNews,
       homeTopBanner,
       homeNewsCategory,
       homeWanNianLi,

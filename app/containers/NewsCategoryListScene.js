@@ -35,7 +35,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import ActionBar from './../components/ActionBar';
-import WeiXinNewsPage from './WeiXinNewsPage';
+import OnLineNewsPage from './OnLineNewsPage';
 import NavigatorRoute from './../common/NavigatorRoute';
 import ScrollableTabView , { ScrollableTabBar } from 'react-native-scrollable-tab-view';
 /**
@@ -56,15 +56,14 @@ class NewsCategoryListScene extends Component {
       return (
           <View style={styles.container}>
               <ActionBar
-                title={"微信精选"}
-                actions={[{title: 'Mine', icon: require('./../res/icon_my_template.png'), show: 'always'}]}
+                title={"在线新闻"}
                 onIconClicked={this._onIconClicked.bind(this)}/>
               <ScrollableTabView
                 tabBarPosition='top'
-                tabBarUnderlineStyle={{backgroundColor: '#f5484c', height: 2}}
+                tabBarUnderlineStyle={{backgroundColor: '#03a9f4', height: 2}}
                 tabBarBackgroundColor='#ffffff'
-                tabBarUnderlineColor='#f5484c'
-                tabBarActiveTextColor='#f5484c'
+                tabBarUnderlineColor='#03a9f4'
+                tabBarActiveTextColor='#03a9f4'
                 tabBarInactiveTextColor='#9b9b9b'
                 scrollWithoutAnimation={false}
                 tabBarTextStyle={{fontSize:14}}
@@ -92,7 +91,7 @@ class NewsCategoryListScene extends Component {
       for (let index=0; index<categories.length; index++) {
           let category = categories[index];
           pages.push(
-              <WeiXinNewsPage
+              <OnLineNewsPage
                   navigator={this.props.navigator}
                   route={this.props.route}
                   categoryKey={category.key}

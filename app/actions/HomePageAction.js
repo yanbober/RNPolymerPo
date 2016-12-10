@@ -73,10 +73,13 @@ export function fetchRecentMoviesList(city) {
         NetUtils.get(URL_RECENT_MOVIES+'?dtype=json&key='+APP_RECENT_MOVIES+'&city='+city)
         .then(function (result) {
             if (result.error_code == 0) {
-                dispatch({
-                    type: types.ACTION_RECENT_MOVIES_FETCHED,
-                    moviesResult: result.result,
-                });
+                if (result.result.data.length > 0) {
+                    //只用正在上映的电影数据
+                    dispatch({
+                        type: types.ACTION_RECENT_MOVIES_FETCHED,
+                        moviesResult: result.result.data[0].data,
+                    });
+                }
             }
             
         }, function () {})

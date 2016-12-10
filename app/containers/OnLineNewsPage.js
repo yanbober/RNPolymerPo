@@ -34,19 +34,18 @@ import {
   StyleSheet,
 } from 'react-native';
 import { connect } from 'react-redux';
-import ActionBar from './../components/ActionBar';
-import ItemWeiXinNewsView from './../components/ItemWeiXinNewsView';
-import { fetchNewsListByPage } from '../actions/WeiXinNewsAction';
+import ItemOnLineNewsView from './../components/ItemOnLineNewsView';
+import { fetchNewsListByPage } from '../actions/OnLineNewsAction';
 import NavigatorRoute from './../common/NavigatorRoute';
 /**
- * 微信精选列表（上拉分页加载）
- * 核心知识点：上拉分页加载更多的ListView
- * http://apistore.baidu.com/apiworks/servicedetail/632.html
+ * 分类新闻列表（上拉分页加载）
+ * 核心知识点：state共用分组解决方案
  */
 const pageLimit = 10;
 
-class WeiXinNewsPage extends Component {
+class OnLineNewsPage extends Component {
   static propTypes = {
+      categoryKey: React.PropTypes.string.isRequired,
       navigator: React.PropTypes.object.isRequired,
       route: React.PropTypes.object.isRequired,
   };
@@ -57,62 +56,55 @@ class WeiXinNewsPage extends Component {
   }
 
 	componentDidMount() {
-	  this.props.dispatch(fetchNewsListByPage(1, pageLimit));		
+	  this.props.dispatch(fetchNewsListByPage(this.props.categoryKey));		
 	}
 
   render() {
-      const { wxNews } = this.props;
-      return (
+      const { onLineNews } = this.props;
+      if (onLineNews[this.props.categoryKey]) {
+        if (onLineNews[this.props.categoryKey].state == 'pre_fetch') {
+          return (
+            <View style={{flex: 1, justifyContent: 'center', alignItems: 'center',}}>
+              <ActivityIndicator
+                animating ={true}
+                size='large'
+                color='#03a9f4'/>
+            </View>  
+          );
+        }
+
+        let listData = onLineNews[this.props.categoryKey].newsList === undefined ? [] : onLineNews[this.props.categoryKey].newsList;
+        return (
           <View style={styles.container}>
-              <ActionBar
-                title={"微信精选"}
-                actions={[{title: 'Mine', icon: require('./../res/icon_my_template.png'), show: 'always'}]}
-                onIconClicked={this._onIconClicked.bind(this)}
-              />
               <ListView
                 style={styles.listview}
-                dataSource={this.dataSource.cloneWithRows(Array.from(wxNews.newsList))}
+                enableEmptySections={true}
+                dataSource={this.dataSource.cloneWithRows(Array.from(listData))}
                 renderRow={this._renderListItemView.bind(this)}
-                onEndReached={ this._onEndReached.bind(this) }
-                renderFooter={ this._renderFooterView.bind(this) }
                 initialListSize={1}
               />
           </View>
-      );
+        );
+      } else {
+        return (
+          <View style={{flex: 1, justifyContent: 'center', alignItems: 'center',}}>
+            <ActivityIndicator
+              animating ={true}
+              size='large'
+              color='#03a9f4'/>
+          </View>  
+        );
+      }
   }
 
   _renderListItemView(item) {
     if (item) {
       return (
-        <ItemWeiXinNewsView
+        <ItemOnLineNewsView
           key={item.id}
           bean={item}
           itemClicked={this._itemPressed.bind(this, item)}/>
       );
-    }
-  }
-
-  _renderFooterView() {
-    const { wxNews } = this.props;
-    if (wxNews.newsList <= 0 || !wxNews.haveMore || !wxNews.isLoadingMore) {
-      return null;
-    } 
-    return (
-      <View style={styles.footerContainer}>
-        <ActivityIndicator
-          animating ={true}
-          size='large'
-          color='#f5484c'/>
-        <Text style={{fontSize: 16}}>正在加载更多...</Text>
-      </View>
-    );
-  }
-
-  _onEndReached() {
-    const { wxNews } = this.props;
-    if (!wxNews.isLoadingMore) {
-      let start = parseInt(wxNews.newsList.length / pageLimit) + 1;
-      this.props.dispatch(fetchNewsListByPage(start, pageLimit));
     }
   }
 
@@ -126,17 +118,18 @@ class WeiXinNewsPage extends Component {
 }
 
 function mapStateToProps(state) {
-  const { wxNews } = state;
+  const { onLineNews } = state;
   return {
-    wxNews,
+    onLineNews,
   }
 }
-export default connect(mapStateToProps)(WeiXinNewsPage);
+export default connect(mapStateToProps)(OnLineNewsPage);
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f7f7f7',
+    paddingBottom: 5,
   },
 
   listview: {

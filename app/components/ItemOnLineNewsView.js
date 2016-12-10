@@ -32,9 +32,9 @@ import {
   StyleSheet,
 } from 'react-native';
 /**
- * 微信精选Item View
+ * 新闻Item View
  */
-export default class ItemWeiXinNewsView extends Component {
+export default class ItemOnLineNewsView extends Component {
   static propTypes = {
       bean: React.PropTypes.object.isRequired,
       itemClicked: React.PropTypes.func.isRequired,
@@ -47,7 +47,7 @@ export default class ItemWeiXinNewsView extends Component {
         onPress={this.props.itemClicked}>
         <View style={styles.itemContainer}>
           <Image style={styles.itemIcon} 
-            source={{uri: (this.props.bean.firstImg=='' ? 'defaults' : this.props.bean.firstImg)}}/>
+            source={{uri: (this.props.bean.thumbnail_pic_s=='' ? 'defaults' : this.props.bean.thumbnail_pic_s)}}/>
           <View style={styles.itemDescription}>
             <Text style={styles.itemTitle} 
               numberOfLines={4}>
@@ -55,7 +55,7 @@ export default class ItemWeiXinNewsView extends Component {
             </Text>
             <Text style={styles.fromText} 
               numberOfLines={1}>
-              {this.props.bean.source}
+              {this.props.bean.author_name}
             </Text>
           </View>
         </View>

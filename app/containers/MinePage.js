@@ -28,13 +28,13 @@ import {
   Text,
   View,
   Image,
-  TouchableNativeFeedback,
-  ActivityIndicator,
+  ScrollView,
   StyleSheet,
 } from 'react-native';
 import { connect } from 'react-redux';
 import ActionBar from './../components/ActionBar';
 import NavigatorRoute from './../common/NavigatorRoute';
+import ItemMineView from './../components/ItemMineView';
 /**
  * 个人中心界面
  */
@@ -52,88 +52,63 @@ class MinePage extends Component {
             title={"个人中心"}
             onIconClicked={this._onIconClicked.bind(this)}
             />
-            <View style={styles.iconContainer}>
-                <Image style={styles.iconImg}
-                    source={require('./../res/icon_auther.jpg')}/>
-                <Text style={styles.iconText}>工匠若水</Text>
-            </View>
-            <View style={styles.itemContainer}>
-                <View style={styles.divLine}/>
-                <Text style={styles.itemGroupNmae}>通用</Text>
-                <View style={styles.divLine}/>
-                <TouchableNativeFeedback
-                    background={TouchableNativeFeedback.SelectableBackground()}
-                    onPress={this._pressedFeedChart.bind(this)}>
-                    <View style={styles.pressItemContainer}>
-                        <Text style={styles.pressItemText}>在线客服意见反馈</Text>
-                        <Image source={require('./../res/ic_arrow_right.png')}
-                            style={styles.pressItemImg}/>
-                    </View>
-                </TouchableNativeFeedback>
-                <View style={styles.divLine}/>
-                <Text style={styles.itemGroupNmae}>其他</Text>
-                <View style={styles.divLine}/>
-                <TouchableNativeFeedback
-                    background={TouchableNativeFeedback.SelectableBackground()}
-                    onPress={this._pressedWebItem.bind(this, 'thisSource')}>
-                    <View style={styles.pressItemContainer}>
-                        <Text style={styles.pressItemText}>本项目开源代码</Text>
-                        <Image source={require('./../res/ic_arrow_right.png')}
-                            style={styles.pressItemImg}/>
-                    </View>
-                </TouchableNativeFeedback>
-                <View style={styles.divLine}/>
-                <TouchableNativeFeedback
-                    background={TouchableNativeFeedback.SelectableBackground()}
-                    onPress={this._pressedWebItem.bind(this, 'RNSource')}>
-                    <View style={styles.pressItemContainer}>
-                        <Text style={styles.pressItemText}>React Native 开源代码</Text>
-                        <Image source={require('./../res/ic_arrow_right.png')}
-                            style={styles.pressItemImg}/>
-                    </View>
-                </TouchableNativeFeedback>
-                <View style={styles.divLine}/>
-                <TouchableNativeFeedback
-                    background={TouchableNativeFeedback.SelectableBackground()}
-                    onPress={this._pressedWebItem.bind(this, 'CodePushSource')}>
-                    <View style={styles.pressItemContainer}>
-                        <Text style={styles.pressItemText}>微软 CodePush 热更新开源代码</Text>
-                        <Image source={require('./../res/ic_arrow_right.png')}
-                            style={styles.pressItemImg}/>
-                    </View>
-                </TouchableNativeFeedback>
-                <View style={styles.divLine}/>
-                <TouchableNativeFeedback
-                    background={TouchableNativeFeedback.SelectableBackground()}
-                    onPress={this._pressedWebItem.bind(this, 'RNDocument')}>
-                    <View style={styles.pressItemContainer}>
-                        <Text style={styles.pressItemText}>React Native 官方文档</Text>
-                        <Image source={require('./../res/ic_arrow_right.png')}
-                            style={styles.pressItemImg}/>
-                    </View>
-                </TouchableNativeFeedback>
-                <View style={styles.divLine}/>
-                <TouchableNativeFeedback
-                    background={TouchableNativeFeedback.SelectableBackground()}
-                    onPress={this._pressedWebItem.bind(this, 'ReduxDocument')}>
-                    <View style={styles.pressItemContainer}>
-                        <Text style={styles.pressItemText}>[React] Redux 中文翻译文档</Text>
-                        <Image source={require('./../res/ic_arrow_right.png')}
-                            style={styles.pressItemImg}/>
-                    </View>
-                </TouchableNativeFeedback>
-                <View style={styles.divLine}/>
-                <TouchableNativeFeedback
-                    background={TouchableNativeFeedback.SelectableBackground()}
-                    onPress={this._pressedWebItem.bind(this, 'xiTuJueJinRN')}>
-                    <View style={styles.pressItemContainer}>
-                        <Text style={styles.pressItemText}>稀土掘金 React Native 专栏</Text>
-                        <Image source={require('./../res/ic_arrow_right.png')}
-                            style={styles.pressItemImg}/>
-                    </View>
-                </TouchableNativeFeedback>
-                <View style={styles.divLine}/>
-            </View>
+            <ScrollView>
+                <View style={styles.iconContainer}>
+                    <Image style={styles.iconImg}
+                        source={require('./../res/icon_auther.jpg')}/>
+                    <Text style={styles.iconText}>工匠若水</Text>
+                </View>
+                <View style={styles.itemContainer}>
+                    <View style={styles.divLine}/>
+                    <Text style={styles.itemGroupNmae}>通用</Text>
+                    <View style={styles.divLine}/>
+                    <ItemMineView
+                        name={'在线客服意见反馈'}
+                        itemClicked={this._pressedFeedChart.bind(this)}/>
+                    <View style={styles.divLine}/>
+                    <Text style={styles.itemGroupNmae}>React Native 学习资源推荐</Text>
+                    <View style={styles.divLine}/>
+                    <ItemMineView
+                        name={'本项目开源代码'}
+                        itemClicked={this._pressedWebItem.bind(this, 'thisSource')}/>
+                    <View style={styles.divLine}/>
+                    <ItemMineView
+                        name={'React Native 开源代码'}
+                        itemClicked={this._pressedWebItem.bind(this, 'RNSource')}/>
+                    <View style={styles.divLine}/>
+                    <ItemMineView
+                        name={'微软 CodePush 热更新开源代码'}
+                        itemClicked={this._pressedWebItem.bind(this, 'CodePushSource')}/>
+                    <View style={styles.divLine}/>
+                    <ItemMineView
+                        name={'React Native 官方文档'}
+                        itemClicked={this._pressedWebItem.bind(this, 'RNDocument')}/>
+                    <View style={styles.divLine}/>
+                    <ItemMineView
+                        name={'React Native 官方文档中文翻译版'}
+                        itemClicked={this._pressedWebItem.bind(this, 'RNDocumentCN')}/>
+                    <View style={styles.divLine}/>
+                    <ItemMineView
+                        name={'[React] Redux 中文翻译文档'}
+                        itemClicked={this._pressedWebItem.bind(this, 'ReduxDocument')}/>
+                    <View style={styles.divLine}/>
+                    <ItemMineView
+                        name={'稀土掘金 React Native 专栏'}
+                        itemClicked={this._pressedWebItem.bind(this, 'xiTuJueJinRN')}/>
+                    <View style={styles.divLine}/>
+                    <Text style={styles.itemGroupNmae}>React Native 开发常见问题官方根据地</Text>
+                    <View style={styles.divLine}/>
+                    <ItemMineView
+                        name={'StackOverflow RN 问题专版'}
+                        itemClicked={this._pressedWebItem.bind(this, 'StackOverFlowRN')}/>
+                    <View style={styles.divLine}/>
+                    <ItemMineView
+                        name={'Github RN 问题专版'}
+                        itemClicked={this._pressedWebItem.bind(this, 'GithubRNIssues')}/>
+                    <View style={styles.divLine}/>
+                    <View style={{height: 5,}}/>
+                </View>
+            </ScrollView>
           </View>
       );
   }
@@ -151,6 +126,9 @@ class MinePage extends Component {
         case 'RNDocument':
             params = {name: 'React Native 官方文档', url: 'https://facebook.github.io/react-native/'};
         break;
+        case 'RNDocumentCN':
+            params = {name: 'React Native 官方文档中文翻译版', url: 'http://reactnative.cn/'};
+        break;
         case 'ReduxDocument':
             params = {name: '[React] Redux 中文翻译文档', url: 'http://cn.redux.js.org/index.html'};
         break;
@@ -159,6 +137,12 @@ class MinePage extends Component {
         break;
         case 'CodePushSource':
             params = {name: '微软 CodePush 热更新开源代码', url: 'https://github.com/Microsoft/react-native-code-push'};
+        break;
+        case 'StackOverFlowRN':
+            params = {name: 'StackOverflow RN 问题专版', url: 'http://stackoverflow.com/questions/tagged/react-native'};
+        break;
+        case 'GithubRNIssues':
+            params = {name: 'Github RN 问题专版', url: 'https://github.com/facebook/react-native/issues'};
         break;
     }
     if (params) {
@@ -224,21 +208,5 @@ const styles = StyleSheet.create({
     fontSize: 10,
     paddingTop: 10,
     paddingBottom: 10,
-  },
-
-  pressItemContainer: {
-    padding: 10,
-    justifyContent:'space-between',
-    flexDirection: 'row',
-    backgroundColor: 'white',
-  },
-
-  pressItemText: {
-    fontSize: 16,
-  },
-
-  pressItemImg: {
-    width: 20,
-    height: 20,
   },
 });
