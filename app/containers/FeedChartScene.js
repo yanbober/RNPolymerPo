@@ -67,8 +67,7 @@ class FeedChartScene extends Component {
   }
 
   componentDidMount() {
-    // this.props.dispatch(fetchRobotResponse('你好'));
-    //http://blog.csdn.net/xiaominghimi/article/details/51606848
+    this.props.dispatch(fetchRobotResponse('你是谁'));
   }
 
   render() {
@@ -88,10 +87,12 @@ class FeedChartScene extends Component {
               title={"在线客服意见反馈"}
               onIconClicked={this._onIconClicked.bind(this)} />
             <ListView
+              style={{flex: 1, padding: 5}}
               ref='_listView'
               onLayout={(e)=>{this.listHeight = e.nativeEvent.layout.height;}}
               dataSource={this.dataSource.cloneWithRows(chartList)}
-              renderRow={(bean)=>{return <ItemIMChartView bean={bean}/>}}/>
+              renderRow={(bean)=>{return <ItemIMChartView bean={bean}/>}}
+              renderFooter={this._renderFooterView.bind(this)}/>
             <View style={styles.bottomContainer}>
               <View style={styles.searchBox}>
                 <TextInput
@@ -115,6 +116,16 @@ class FeedChartScene extends Component {
             </View>
           </View>
       );
+  }
+
+  _renderFooterView() {
+    return <View onLayout={(e)=> {
+      this.footerY= e.nativeEvent.layout.y;
+      if (this.listHeight && this.footerY &&this.footerY>this.listHeight) {
+        var scrollDistance = this.listHeight - this.footerY;
+        this.refs._listView.scrollTo({y:-scrollDistance});
+      }
+    }}/>
   }
 
   _onIconClicked() {

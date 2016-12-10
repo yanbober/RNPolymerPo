@@ -62,6 +62,7 @@ export default class ItemIMChartView extends Component {
 
 const styles = StyleSheet.create({
   itemContainer: {
+    flex: 1,
     flexDirection: 'row'
   },
 

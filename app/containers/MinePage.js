@@ -185,6 +185,9 @@ const styles = StyleSheet.create({
   iconImg: {
     width: 90,
     height: 90,
+    borderRadius: 45,
+    borderWidth: 0.5,
+    borderColor: '#dddddd',
   },
 
   iconText: {

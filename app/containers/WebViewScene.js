@@ -32,11 +32,12 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import ActionBar from './../components/ActionBar';
+import NavigatorRoute from './../common/NavigatorRoute';
 /**
  * 通用WebView页面
  * 核心知识点：WebView的使用
- *            ref的使用
- *            学会查看源码Libraries目录下WebView.android.js的onNavigationStateChange方法参数
+ *           ref的使用
+ *           学会查看源码Libraries目录下WebView.android.js的onNavigationStateChange方法参数
  */
 class WebViewScene extends Component {
     static propTypes = {
@@ -97,7 +98,8 @@ class WebViewScene extends Component {
             <View style={Styles.container}>
                 <ActionBar
                     title={this.titleName}
-                    navigator={this.props.navigator}/>
+                    navigator={this.props.navigator}
+                    onIconClicked={this._onIconClicked.bind(this)}/>
                 <WebView
                     ref='_webView'
                     automaticallyAdjustContentInsets={true}
@@ -135,6 +137,10 @@ class WebViewScene extends Component {
 
     componentWillUnmount() {
         BackAndroid.removeEventListener('webHardwareBackPress');
+    }
+
+    _onIconClicked() {
+      NavigatorRoute.navigatorPopBack(this.props.navigator);
     }
 }
 
