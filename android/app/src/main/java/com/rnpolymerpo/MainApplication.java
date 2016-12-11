@@ -13,6 +13,8 @@ import com.facebook.soloader.SoLoader;
 import java.util.Arrays;
 import java.util.List;
 
+import com.pgyersdk.crash.PgyCrashManager;
+
 public class MainApplication extends Application implements ReactApplication {
 
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
@@ -37,6 +39,7 @@ public class MainApplication extends Application implements ReactApplication {
   @Override
   public void onCreate() {
     super.onCreate();
+    PgyCrashManager.register(this);
     SoLoader.init(this, /* native exopackage */ false);
   }
 }

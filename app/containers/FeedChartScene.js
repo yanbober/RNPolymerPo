@@ -87,7 +87,7 @@ class FeedChartScene extends Component {
               title={"在线客服意见反馈"}
               onIconClicked={this._onIconClicked.bind(this)} />
             <ListView
-              style={{flex: 1, padding: 5}}
+              style={{ padding: 5}}
               ref='_listView'
               onLayout={(e)=>{this.listHeight = e.nativeEvent.layout.height;}}
               dataSource={this.dataSource.cloneWithRows(chartList)}

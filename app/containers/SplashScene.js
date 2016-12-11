@@ -36,6 +36,20 @@ import NavigatorRoute from './../common/NavigatorRoute';
  * splash页面（简单模拟闪屏广告）
  * 核心知识点：使用React Native的传统state传递倒计时
  */
+const AD_URLS = [
+  'http://wanzao2.b0.upaiyun.com/system/pictures/34592918/original/1459169392_602x710.jpg',
+  'http://img.zcool.cn/community/018f5255f959116ac7251df8af2a4d.jpg',
+  'http://ec4.images-amazon.com/images/I/515BsYKPz0L._SY400_.jpg',
+  'http://www.qlmoney.com/uploadfile/2016/1010/20161010033437141.jpg',
+  'http://img4.duitang.com/uploads/item/201601/16/20160116233008_YGQCc.jpeg',
+  'http://image.kejixun.com/2016/1118/20161118121413566.jpeg',
+  'http://www.wedalian.com/Uploads/a/2016/02/02/ntlbueffi02.jpg',
+  'http://www.wedalian.com/Uploads/a/2016/02/02/epmpwrk3rql.jpg',
+  'http://easyread.ph.126.net/xWCFBUaTqiJWcnZksiGiXQ==/7916647547221380812.jpg',
+  'http://wanzao2.b0.upaiyun.com/system/pictures/16123497/original/1421908034_216x224.png',
+  'http://img3.duitang.com/uploads/item/201602/25/20160225174417_i8ASK.jpeg',
+];
+
 export default class SplashScene extends Component {
   static propTypes = {
     navigator: React.PropTypes.object.isRequired,
@@ -48,6 +62,7 @@ export default class SplashScene extends Component {
       adSecondsCount: 3,  //广告闪屏倒计时
       showAdMark: false,  //是否展示 ad 标识
     };
+    this.curAdIndex = parseInt(10*Math.random());
   }
 
   componentDidMount() {
@@ -71,15 +86,15 @@ export default class SplashScene extends Component {
           <View style={styles.container}>
             <StatusBar  hidden={true}/>
             <Image style={styles.adImg}
-              source={{uri: 'http://img.zcool.cn/community/018f5255f959116ac7251df8af2a4d.jpg'}}
+              source={{uri: AD_URLS[this.curAdIndex]}}
               onLoad={this._onLoadImg.bind(this)}>
-              <View style={styles.adMarkContainer}>
+              <View style={this.state.showAdMark ? styles.adMarkContainer : {width: 0,}}>
                 <Text style={styles.adMarkText}>{this.state.showAdMark ? 'AD' : ''}</Text>
               </View>
             </Image>
             <Text style={styles.secondsCounts}
               onPress={this._secondsCountsPressed.bind(this)}>
-              {this.state.adSecondsCount + '秒 >'}
+              {this.state.showAdMark ? (this.state.adSecondsCount + '秒 >') : ''}
             </Text>
             <View style={styles.releaseContainer}>
                 <Image source={require('./../res/ic_launcher.png')}
@@ -109,6 +124,7 @@ const styles = StyleSheet.create({
 
   adImg: {
     flex: 1,
+    resizeMode: 'contain', 
   },
 
   adMarkContainer: {
