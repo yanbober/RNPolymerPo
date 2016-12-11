@@ -68,7 +68,8 @@ class WebViewScene extends Component {
         let params = route.paramers;
         this.pushFrom = route.pushFrom;
         switch(this.pushFrom) {
-            case 'wxNews':
+            case 'weixinNews':
+            case 'onLineNews':
                 this.linkUrl = params.url;
                 this.titleName = params.title;
                 break;

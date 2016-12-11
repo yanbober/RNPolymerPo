@@ -24,46 +24,38 @@
 'use strict';
 
 import React, { Component } from 'react';
-import WebViewScene from './../containers/WebViewScene';
-import MainScene from './../containers/MainScene';
-import FeedChartScene from './../containers/FeedChartScene';
-import NewsCategoryListScene from './../containers/NewsCategoryListScene';
+import {
+    Animated,
+    PropTypes,
+} from 'react-native';
+/**
+ * 支持设置淡入淡出渐变动画的Image组件
+ */
+export default class FadeAnimedImage extends Component {
+    static propTypes = {
+        source: React.PropTypes.string.isRequired,
+        inputRange: React.PropTypes.array.isRequired,
+        outputRange: React.PropTypes.array.isRequired,
+    };
 
-export default class NavigatorRoute extends Component {
-
-    static navigatorPopBack(navigator) {
-        if (navigator && navigator.getCurrentRoutes().length > 1) {
-            navigator.pop();
-            return true;
-        }
-        return false;
-    }
-
-    static replaceToMainScene(navigator) {
-        navigator.replace({
-            component: MainScene,
+    render() {
+        this._animatedValue = new Animated.Value(0);
+        let interpolatedColorAnimation = this._animatedValue.interpolate({
+            inputRange: this.props.inputRange,
+            outputRange: this.props.outputRange
         });
-    }
 
-    static pushToFeedChartScene(navigator) {
-        navigator.push({
-            component: FeedChartScene,
-        });
-    }
-
-    static pushToNewsCategoryListScene(navigator, categories, curKey) {
-        navigator.push({
-            component: NewsCategoryListScene,
-            curKey: curKey,
-            categories: categories,
-        });
-    }
-
-    static pushToWebViewScene(navigator, pushFrom, paramers) {
-        navigator.push({
-            component: WebViewScene,
-            pushFrom: pushFrom,
-            paramers: paramers,
-        });
+        return (
+            <Animated.Image
+                onLoadEnd={() => {
+                    Animated.timing(this._animatedValue, {
+                        toValue: 100,
+                        duration: 500
+                    }).start();
+                }}
+                onLoad={this.props.onLoad ? this.props.onLoad : ()=>{}}
+                source={{uri: this.props.source}}
+                style={[this.props.style, {opacity: interpolatedColorAnimation}]} />
+        );
     }
 }

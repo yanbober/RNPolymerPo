@@ -32,9 +32,10 @@ import {
   Image,
 } from 'react-native';
 import NavigatorRoute from './../common/NavigatorRoute';
+import FadeAnimedImage from './../components/FadeAnimedImage';
 /**
  * splash页面（简单模拟闪屏广告）
- * 核心知识点：使用React Native的传统state传递倒计时
+ * 核心知识点：使用React Native的传统state传递倒计时，不用redux框架的混乱结构学习(故意体验下没有框架的错乱)
  */
 const AD_URLS = [
   'http://wanzao2.b0.upaiyun.com/system/pictures/34592918/original/1459169392_602x710.jpg',
@@ -59,7 +60,7 @@ export default class SplashScene extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      adSecondsCount: 3,  //广告闪屏倒计时
+      adSecondsCount: 4,  //广告闪屏倒计时
       showAdMark: false,  //是否展示 ad 标识
     };
     this.curAdIndex = parseInt(10*Math.random());
@@ -85,13 +86,12 @@ export default class SplashScene extends Component {
       return (
           <View style={styles.container}>
             <StatusBar  hidden={true}/>
-            <Image style={styles.adImg}
-              source={{uri: AD_URLS[this.curAdIndex]}}
+            <FadeAnimedImage style={styles.adImg}
+              inputRange={[0, 100]}
+              outputRange={[0, 1]}
+              source={AD_URLS[this.curAdIndex]}
               onLoad={this._onLoadImg.bind(this)}>
-              <View style={this.state.showAdMark ? styles.adMarkContainer : {width: 0,}}>
-                <Text style={styles.adMarkText}>{this.state.showAdMark ? 'AD' : ''}</Text>
-              </View>
-            </Image>
+            </FadeAnimedImage>
             <Text style={styles.secondsCounts}
               onPress={this._secondsCountsPressed.bind(this)}>
               {this.state.showAdMark ? (this.state.adSecondsCount + '秒 >') : ''}
@@ -102,6 +102,9 @@ export default class SplashScene extends Component {
                 <Text style={styles.appText}>
                     {'RNPolymerPo'}
                 </Text>
+            </View>
+            <View style={[styles.adMarkContainer, {borderColor: this.state.showAdMark ? '#6fd177' : 'white'}]}>
+              <Text style={styles.adMarkText}>{this.state.showAdMark ? 'AD' : ''}</Text>
             </View>
           </View>
       );
@@ -128,11 +131,12 @@ const styles = StyleSheet.create({
   },
 
   adMarkContainer: {
-    margin: 20,
+    position: 'absolute',
+    top: 15,
+    left: 15,
     backgroundColor: 'white',
     paddingLeft: 2,
     paddingRight: 2,
-    borderColor: '#6fd177',
     borderStyle: null,
     borderWidth: 0.5,
     borderRadius: 2,

@@ -109,7 +109,7 @@ class OnLineNewsPage extends Component {
   }
 
   _itemPressed(wxNewsBean) {
-    NavigatorRoute.pushToWebViewScene(this.props.navigator, 'wxNews', wxNewsBean);
+    NavigatorRoute.pushToWebViewScene(this.props.navigator, 'onLineNews', wxNewsBean);
   }
 
   _onIconClicked() {

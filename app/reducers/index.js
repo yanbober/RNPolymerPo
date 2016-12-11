@@ -25,6 +25,7 @@
 
 import { combineReducers } from 'redux';
 import { onLineNews } from './OnLineNewsReducer';
+import { weiXinNews } from './WeiXinNewsReducer';
 import {
       homeTopBanner, 
       homeNewsCategory, 
@@ -40,6 +41,7 @@ const rootReducer = combineReducers({
       homeWanNianLi,
       homeRecentMovies,
       robotChart,
+      weiXinNews,
 });
 
 export default rootReducer;

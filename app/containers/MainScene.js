@@ -37,6 +37,7 @@ import NavigatorRoute from './../common/NavigatorRoute';
 import TabNavigator from 'react-native-tab-navigator'
 import HomePage from './HomePage';
 import MinePage from './MinePage';
+import WeiXinNewsPage from './WeiXinNewsPage';
 /**
  * 主容器界面
  * 核心知识点：使用React Native Redux框架管理
@@ -75,19 +76,21 @@ class MainScene extends Component {
               route={this.props.route}/>
           </TabNavigator.Item>
           <TabNavigator.Item
-            title="驾照刷题"
-            selected={this.state.selectedTab === 'profile'}
+            title="微信精选"
+            selected={this.state.selectedTab === 'weixin'}
             renderIcon={() => <Image source={require('./../res/ic_category_live.png')} />}
             renderSelectedIcon={() => <Image source={require('./../res/ic_category_live.png')} />}
-            onPress={() => this.setState({ selectedTab: 'profile' })}>
-            <View/>
+            onPress={() => this.setState({ selectedTab: 'weixin' })}>
+            <WeiXinNewsPage
+              navigator={this.props.navigator}
+              route={this.props.route}/>
           </TabNavigator.Item>
           <TabNavigator.Item
             title="个人中心"
-            selected={this.state.selectedTab === 'aaaaa'}
+            selected={this.state.selectedTab === 'person'}
             renderIcon={() => <Image source={require('./../res/ic_category_energy.png')} />}
             renderSelectedIcon={() => <Image source={require('./../res/ic_category_energy.png')} />}
-            onPress={() => this.setState({ selectedTab: 'aaaaa' })}>
+            onPress={() => this.setState({ selectedTab: 'person' })}>
             <MinePage
               navigator={this.props.navigator}
               route={this.props.route}/>

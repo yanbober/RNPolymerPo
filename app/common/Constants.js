@@ -24,6 +24,8 @@
 'use strict';
 /**
  * 常量
+ * 特别声明：数据 API 均来自网络，使用个人帐号注册申请，里面涉及 KEY、SIGN 的字段本着开源项目
+ *          可以正常运行没有进行处理，请大家不要抱有非分想法，本着技术学习交流的态度使用 API。
  */
 
 //在线新闻
@@ -42,6 +44,10 @@ export const URL_TULING_ROBOT = 'http://op.juhe.cn/robot/index';
 export const APP_RECENT_MOVIES = '37621eeefd05cde6bf0e4aa8c1516b11';
 export const URL_RECENT_MOVIES = 'http://op.juhe.cn/onebox/movie/pmovie';
 
+//微信精选
+export const URL_WEI_XIN_JINGXUAN = 'http://api.tianapi.com/wxnew/';
+export const APP_KEY_WEI_XIN_JINGXUAN = '56ea19cddad7e896b6e90d5d4cde3628';
+                    
 //Home页top banner数据（网络没有接口，只能本地模拟造假）
 export const FAKE_BANNER_NET_DATA =[{
         id: 1234567890,
