@@ -83,31 +83,31 @@ export default class SplashScene extends Component {
   }
 
   render() {
-      return (
-          <View style={styles.container}>
-            <StatusBar  hidden={true}/>
-            <FadeAnimedImage style={styles.adImg}
-              inputRange={[0, 100]}
-              outputRange={[0, 1]}
-              source={AD_URLS[this.curAdIndex]}
-              onLoad={this._onLoadImg.bind(this)}>
-            </FadeAnimedImage>
-            <Text style={styles.secondsCounts}
-              onPress={this._secondsCountsPressed.bind(this)}>
-              {this.state.showAdMark ? (this.state.adSecondsCount + '秒 >') : ''}
-            </Text>
-            <View style={styles.releaseContainer}>
-                <Image source={require('./../res/ic_launcher.png')}
-                  style={styles.appIcon}/>
-                <Text style={styles.appText}>
-                    {'RNPolymerPo'}
-                </Text>
-            </View>
-            <View style={[styles.adMarkContainer, {borderColor: this.state.showAdMark ? '#6fd177' : 'white'}]}>
-              <Text style={styles.adMarkText}>{this.state.showAdMark ? 'AD' : ''}</Text>
-            </View>
-          </View>
-      );
+    return (
+      <View style={styles.container}>
+        <StatusBar hidden={true}/>
+        <FadeAnimedImage style={styles.adImg}
+          inputRange={[0, 100]}
+          outputRange={[0, 1]}
+          source={AD_URLS[this.curAdIndex]}
+          onLoad={this._onLoadImg.bind(this)}>
+        </FadeAnimedImage>
+        <Text style={styles.secondsCounts}
+          onPress={this._secondsCountsPressed.bind(this)}>
+          {this.state.showAdMark ? (this.state.adSecondsCount + '秒 >') : ''}
+        </Text>
+        <View style={styles.releaseContainer}>
+          <Image source={require('./../res/ic_launcher.png')}
+            style={styles.appIcon}/>
+          <Text style={styles.appText}>
+            {'RNPolymerPo'}
+          </Text>
+        </View>
+        <View style={[styles.adMarkContainer, {borderColor: this.state.showAdMark ? '#6fd177' : 'white'}]}>
+          <Text style={styles.adMarkText}>{this.state.showAdMark ? 'AD' : ''}</Text>
+        </View>
+      </View>
+    );
   }
 
   _secondsCountsPressed() {

@@ -43,10 +43,10 @@ import NavigatorRoute from './../common/NavigatorRoute';
 const pageLimit = 10;
 
 class WeiXinNewsPage extends Component {
-    static propTypes = {
-      navigator: React.PropTypes.object.isRequired,
-      route: React.PropTypes.object.isRequired,
-    };
+  static propTypes = {
+    navigator: React.PropTypes.object.isRequired,
+    route: React.PropTypes.object.isRequired,
+  };
 
 	componentDidMount() {
 		this.props.dispatch(fetchWeiXinNewsListByPage(1, pageLimit));		
@@ -56,34 +56,34 @@ class WeiXinNewsPage extends Component {
       const {weiXinNews} = this.props;
       let listData = weiXinNews.newsList === undefined ? [] : weiXinNews.newsList;
       return (
-        <View style={Styles.container}>
+        <View style={styles.container}>
             <ActionBar
               title={"微信精选"}
               onIconClicked={this._onIconClicked.bind(this)}/>
             <GridView
-              style={Styles.recommandListview}
+              style={styles.gridview}
               items={Array.from(listData)}
               itemsPerRow={2}
-              renderItem={this.renderRecommandListItemView.bind(this)}
-              onEndReached={ this.onEndReached.bind(this) }
-              renderFooter={ this.renderFooterView.bind(this) }
+              renderItem={this._renderListItemView.bind(this)}
+              onEndReached={ this._onEndReached.bind(this) }
+              renderFooter={ this._renderFooterView.bind(this) }
             />
         </View>
       );
   }
 
-  renderRecommandListItemView(template) {
-    if (template) {
+  _renderListItemView(bean) {
+    if (bean) {
       return (
         <ItemWeiXinNewsView
-          key={template.title}
-          bean={template}
-          itemClicked={this._templateItemPressed.bind(this, template)}/>
+          key={bean.title}
+          bean={bean}
+          itemClicked={this._itemPressed.bind(this, bean)}/>
       );
     }
   }
 
-  renderFooterView() {
+  _renderFooterView() {
     const {weiXinNews} = this.props;
     if (weiXinNews.newsList == undefined) {
       return null;
@@ -92,17 +92,17 @@ class WeiXinNewsPage extends Component {
       return null;
     }
     return (
-      <View style={Styles.footerContainer}>
+      <View style={styles.footerContainer}>
         <ActivityIndicator
           animating ={true}
           size='large'
-          color='#f5484c'/>
-        <Text style={{fontSize: 16}}>Loading...</Text>
+          color='#03a9f4'/>
+        <Text style={{fontSize: 16}}>正在拼命加载...</Text>
       </View>
     );
   }
 
-  onEndReached() {
+  _onEndReached() {
     const {weiXinNews} = this.props;
     if (!weiXinNews.isLoadingMore) {
       let start = weiXinNews.newsList.length + 1;
@@ -110,7 +110,7 @@ class WeiXinNewsPage extends Component {
     }
   }
 
-  _templateItemPressed(template) {
+  _itemPressed(template) {
     NavigatorRoute.pushToWebViewScene(this.props.navigator, 'weixinNews', template);
   }
 
@@ -127,13 +127,13 @@ function mapStateToProps(state) {
 }
 export default connect(mapStateToProps)(WeiXinNewsPage);
 
-const Styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ffffff',
+    backgroundColor: '#f7f7f7',
   },
 
-  recommandListview: {
+  gridview: {
     flex: 1,
     paddingTop: 8,
   },

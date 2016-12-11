@@ -179,7 +179,9 @@ class HomePage extends Component {
   }
 
   _buyMoviesTicks() {
-    NavigatorRoute.pushToWebViewScene(this.props.navigator, 'buyMovies', {url: 'http://m.wepiao.com/', title: '我要看电影'});
+    NavigatorRoute.pushToWebViewScene(this.props.navigator, 
+                                      'buyMovies', 
+                                      {url: 'http://m.wepiao.com/', title: '我要看电影'});
   }
 
   _pressedBannerItem(bannerBean) {
@@ -187,7 +189,9 @@ class HomePage extends Component {
   }
 
   _itemPressed(data) {
-    NavigatorRoute.pushToWebViewScene(this.props.navigator, 'onLineMovie', {name: data.tvTitle, url: data.m_iconlinkUrl});
+    NavigatorRoute.pushToWebViewScene(this.props.navigator, 
+                                      'onLineMovie', 
+                                      {name: data.tvTitle, url: data.m_iconlinkUrl});
   }
 
   _onIconClicked() {

@@ -45,8 +45,8 @@ import WeiXinNewsPage from './WeiXinNewsPage';
  */
 class MainScene extends Component {
   static propTypes = {
-      navigator: React.PropTypes.object.isRequired,
-      route: React.PropTypes.object.isRequired,
+    navigator: React.PropTypes.object.isRequired,
+    route: React.PropTypes.object.isRequired,
   };
 
   constructor(props) {
@@ -67,9 +67,10 @@ class MainScene extends Component {
         <TabNavigator tabBarStyle={{ backgroundColor:'white' }} style={{backgroundColor: 'white'}}>
           <TabNavigator.Item
             title="潮流生活"
+            selectedTitleStyle={{color: '#03a9f4'}}
             selected={this.state.selectedTab === 'home'}
-            renderIcon={() => <Image source={require('./../res/ic_category_hot.png')} />}
-            renderSelectedIcon={() => <Image source={require('./../res/ic_category_hot.png')} />}
+            renderIcon={() => <Image source={require('./../res/ic_btm_home.png')} />}
+            renderSelectedIcon={() => <Image source={require('./../res/ic_btm_home.png')} />}
             onPress={() => this.setState({ selectedTab: 'home' })}>
             <HomePage
               navigator={this.props.navigator}
@@ -77,9 +78,10 @@ class MainScene extends Component {
           </TabNavigator.Item>
           <TabNavigator.Item
             title="微信精选"
+            selectedTitleStyle={{color: '#03a9f4'}}
             selected={this.state.selectedTab === 'weixin'}
-            renderIcon={() => <Image source={require('./../res/ic_category_live.png')} />}
-            renderSelectedIcon={() => <Image source={require('./../res/ic_category_live.png')} />}
+            renderIcon={() => <Image source={require('./../res/ic_btm_weixin.png')} />}
+            renderSelectedIcon={() => <Image source={require('./../res/ic_btm_weixin.png')} />}
             onPress={() => this.setState({ selectedTab: 'weixin' })}>
             <WeiXinNewsPage
               navigator={this.props.navigator}
@@ -87,9 +89,10 @@ class MainScene extends Component {
           </TabNavigator.Item>
           <TabNavigator.Item
             title="个人中心"
+            selectedTitleStyle={{color: '#03a9f4'}}
             selected={this.state.selectedTab === 'person'}
-            renderIcon={() => <Image source={require('./../res/ic_category_energy.png')} />}
-            renderSelectedIcon={() => <Image source={require('./../res/ic_category_energy.png')} />}
+            renderIcon={() => <Image source={require('./../res/ic_btm_persion.png')} />}
+            renderSelectedIcon={() => <Image source={require('./../res/ic_btm_persion.png')} />}
             onPress={() => this.setState({ selectedTab: 'person' })}>
             <MinePage
               navigator={this.props.navigator}

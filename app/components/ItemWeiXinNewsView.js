@@ -46,20 +46,22 @@ export default class ItemWeiXinNewsView extends Component {
       <TouchableNativeFeedback
         background={TouchableNativeFeedback.SelectableBackground()}
         onPress={this.props.itemClicked}>
-        <View style={Styles.templateItemContainer}>
-          <Image style={Styles.templateItemIcon} 
+        <View style={styles.itemContainer}>
+          <Image style={styles.itemIcon} 
             source={{uri: this.props.bean.picUrl}}/>
-          <View style={Styles.templateItemDescription}>
-            <View style={Styles.templateItemRow1}>
-              <Text style={Styles.templateItemTitle} 
-                  numberOfLines={1}>
-                  {this.props.bean.title}
+          <View style={styles.itemDescription}>
+            <Text style={styles.itemTitle} 
+              numberOfLines={2}>
+              {this.props.bean.title}
+            </Text>
+            <View style={styles.rowContainer}>
+              <Text style={styles.ctime} 
+                numberOfLines={1}>
+                {this.props.bean.ctime}
               </Text>
-            </View>
-            <View style={Styles.templateItemRow2Container}>
-              <Text style={Styles.templateItemTitle} 
-                  numberOfLines={1}>
-                  {this.props.bean.description} {this.props.bean.ctime}
+              <Text style={styles.description} 
+                numberOfLines={1}>
+                {this.props.bean.description}
               </Text>
             </View>
           </View>
@@ -70,88 +72,51 @@ export default class ItemWeiXinNewsView extends Component {
 
 }
 
-const Styles = StyleSheet.create({
-  templateItemContainer: {
-    backgroundColor: 'white',
+const styles = StyleSheet.create({
+  itemContainer: {
+    backgroundColor: '#f8f8ff',
     marginVertical: 4,
     borderColor: '#dddddd',
     borderStyle: null,
     borderWidth: 0.5,
     borderRadius: 2,
-    width: 164,
+    width: 165,
     marginLeft: (width - 164 * 2) / 4, //(屏幕宽度-两个item宽度)/4=边缘margin
     marginRight: (width - 164 * 2) / 4,
   },
 
-  templateItemIcon: {
+  itemIcon: {
     width: 163.5,
     height: 113,
     backgroundColor: '#e9e9e9',
   },
 
-  templateItemDescription: {
+  itemDescription: {
     flex: 1,
-    marginLeft: 8,
-    marginTop: 12,
-    marginRight: 8,
-    marginBottom: 8,
+    margin: 5,
   },
 
-  templateItemRow1: {
+  rowContainer: {
+    padding: 0,
+    flex: 1,
     flexDirection: 'row',
-    padding: 0,
   },
 
-  templateItemRow2Container: {
-    padding: 0,
-    marginTop: 10,
-  },
-
-  templateItemRowIcon: {
-    width: 12,
-    height: 12,
-  },
-
-  templateItemTitle: {
-    marginTop: -4,
-    marginLeft: 5,
+  itemTitle: {
     color: '#535252',
     fontSize: 14,
-    width: 135,
+    flex: 1,
   },
 
-  priceContainer: {
-    flexDirection: 'row',
-    padding: 0,
+  ctime: {
+    flex: 1,
+    textAlign: 'left',
+    fontSize: 10,
   },
 
-  priceFreeContainer: {
-    backgroundColor: 'white',
-    paddingLeft: 2,
-    paddingRight: 2,
-    borderColor: '#6fd177',
-    borderStyle: null,
-    borderWidth: 0.5,
-    borderRadius: 2,
-    width: 23,
-  },
-
-  priceFreeText: {
-    fontSize: 9,
-    color: '#6fd177',
-  },
-
-  priceDiscount: {
-    marginTop: -4,
-    marginLeft: 5,
-    color: '#535252',
-    fontSize: 14,
-  },
-
-  priceRealNormal: {
-    textDecorationLine: 'line-through',
-    marginLeft: 5,
-    color: '#9b9b9b',
+  description: {
+    flex: 1,
+    textAlign: 'right',
     fontSize: 10,
   },
 });

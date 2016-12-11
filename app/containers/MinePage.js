@@ -40,14 +40,14 @@ import ItemMineView from './../components/ItemMineView';
  */
 class MinePage extends Component {
   static propTypes = {
-      navigator: React.PropTypes.object.isRequired,
-      route: React.PropTypes.object.isRequired,
+    navigator: React.PropTypes.object.isRequired,
+    route: React.PropTypes.object.isRequired,
   };
 
   render() {
-      const { homeTopBanner } = this.props;
-      return (
-          <View style={styles.container}>
+    const { homeTopBanner } = this.props;
+    return (
+        <View style={styles.container}>
             <ActionBar
             title={"个人中心"}
             onIconClicked={this._onIconClicked.bind(this)}
@@ -109,8 +109,8 @@ class MinePage extends Component {
                     <View style={{height: 5,}}/>
                 </View>
             </ScrollView>
-          </View>
-      );
+        </View>
+    );
   }
 
 

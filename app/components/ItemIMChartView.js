@@ -35,13 +35,12 @@ import {
  */
 export default class ItemIMChartView extends Component {
   static propTypes = {
-      bean: React.PropTypes.object.isRequired,
-      itemClicked: React.PropTypes.func.isRequired,
+    bean: React.PropTypes.object.isRequired,
   };
 
   render() {
     return (
-      <View style={styles.itemContainer}>
+      <View style={this.props.bean.isUser == true ? styles.itemUserContainer : styles.itemRobotContainer}>
         <Image
           source={this.props.bean.isUser == true ? null : require('./../res/customer_service.png')}
           style={this.props.bean.isUser == true ? null : styles.robotImg}
@@ -61,23 +60,32 @@ export default class ItemIMChartView extends Component {
 }
 
 const styles = StyleSheet.create({
-  itemContainer: {
+  itemUserContainer: {
+    justifyContent: 'flex-end',
     flex: 1,
-    flexDirection: 'row'
+    flexDirection: 'row',
+    marginLeft: 45,
+  },
+
+  itemRobotContainer: {
+    justifyContent: 'flex-start',
+    flex: 1,
+    flexDirection: 'row',
+    marginRight: 45,
   },
 
   robotImg: {
     height: 40,
     width: 40,
-    marginLeft:10,
-    marginBottom:10
+    marginLeft: 5,
+    marginBottom: 10
   },
 
   userImg: {
     height: 40,
     width: 40,
-    marginRight:10,
-    marginBottom:10
+    marginRight: 5,
+    marginBottom: 10
   },
 
   contentText: {
@@ -86,19 +94,17 @@ const styles = StyleSheet.create({
   },
 
   robotContentContainer: {
-    flex: 1,
     alignItems: 'center',
     backgroundColor: '#c8e6c9',
     flexDirection: 'row',
     padding: 10,
-    borderRadius:10,
-    marginLeft:5,
-    marginRight:55,
-    marginBottom:10
+    borderRadius: 10,
+    marginLeft: 5,
+    marginRight: 55,
+    marginBottom: 10
   },
 
   userContentContainer: {
-    flex: 1,
     alignItems: 'center',
     backgroundColor: '#b2ebf2',
     flexDirection: 'row',

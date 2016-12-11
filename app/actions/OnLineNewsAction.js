@@ -30,6 +30,17 @@ import {
 } from  '../common/Constants';
 import NetUtils from './../utils/NetUtils';
 
+export function resetNewsListState(key) {
+    return dispatch => {
+        dispatch({
+            type: types.ACTION_ONLINE_NEWS_PRE_FETCH,
+            state: 'pre_fetch',
+            categoryKey: key,
+            newsList: [],
+        });
+    };
+}
+
 export function fetchNewsListByPage(key) {
     return dispatch => {
         dispatch({

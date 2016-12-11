@@ -24,6 +24,10 @@
 'use strict';
 
 import React, { Component } from 'react';
+import {
+  BackAndroid,
+  Alert,
+} from 'react-native';
 import WebViewScene from './../containers/WebViewScene';
 import MainScene from './../containers/MainScene';
 import FeedChartScene from './../containers/FeedChartScene';
@@ -33,10 +37,20 @@ export default class NavigatorRoute extends Component {
 
     static navigatorPopBack(navigator) {
         if (navigator && navigator.getCurrentRoutes().length > 1) {
+            console.log('----------navigatorPopBack-1');
             navigator.pop();
             return true;
         }
-        return false;
+        
+        Alert.alert(
+            '退出应用',
+            '亲，您真的不再需要奴婢做牛做马了吗？',
+            [
+            { text: '需要', onPress: () => {} },
+            { text: '不需要', onPress: () => {BackAndroid.exitApp()}},
+            ]
+        );
+        return true;
     }
 
     static replaceToMainScene(navigator) {

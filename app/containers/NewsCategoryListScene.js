@@ -47,32 +47,32 @@ const pageLimit = 10;
 
 class NewsCategoryListScene extends Component {
   static propTypes = {
-      navigator: React.PropTypes.object.isRequired,
-      route: React.PropTypes.object.isRequired,
+    navigator: React.PropTypes.object.isRequired,
+    route: React.PropTypes.object.isRequired,
   };
 
   render() {
-      const {route} = this.props;
-      return (
-          <View style={styles.container}>
-              <ActionBar
-                title={"在线新闻"}
-                onIconClicked={this._onIconClicked.bind(this)}/>
-              <ScrollableTabView
-                tabBarPosition='top'
-                tabBarUnderlineStyle={{backgroundColor: '#03a9f4', height: 2}}
-                tabBarBackgroundColor='#ffffff'
-                tabBarUnderlineColor='#03a9f4'
-                tabBarActiveTextColor='#03a9f4'
-                tabBarInactiveTextColor='#9b9b9b'
-                scrollWithoutAnimation={false}
-                tabBarTextStyle={{fontSize:14}}
-                initialPage={this._currentSelectedPageIndex(route.categories, route.curKey)}
-                renderTabBar={() => <ScrollableTabBar/>}>
-                {this._renderTabPage(route.categories)}
-              </ScrollableTabView>
-          </View>
-      );
+    const {route} = this.props;
+    return (
+      <View style={styles.container}>
+        <ActionBar
+          title={"在线新闻"}
+          onIconClicked={this._onIconClicked.bind(this)}/>
+        <ScrollableTabView
+          tabBarPosition='top'
+          tabBarUnderlineStyle={{backgroundColor: '#03a9f4', height: 2}}
+          tabBarBackgroundColor='#ffffff'
+          tabBarUnderlineColor='#03a9f4'
+          tabBarActiveTextColor='#03a9f4'
+          tabBarInactiveTextColor='#9b9b9b'
+          scrollWithoutAnimation={false}
+          tabBarTextStyle={{fontSize:14}}
+          initialPage={this._currentSelectedPageIndex(route.categories, route.curKey)}
+          renderTabBar={() => <ScrollableTabBar/>}>
+          {this._renderTabPage(route.categories)}
+        </ScrollableTabView>
+      </View>
+    );
   }
 
   _currentSelectedPageIndex(categories, curKey) {
@@ -87,19 +87,19 @@ class NewsCategoryListScene extends Component {
   }
 
   _renderTabPage(categories) {
-      let pages = [];
-      for (let index=0; index<categories.length; index++) {
-          let category = categories[index];
-          pages.push(
-              <OnLineNewsPage
-                  navigator={this.props.navigator}
-                  route={this.props.route}
-                  categoryKey={category.key}
-                  key={category.key}
-                  tabLabel={category.title}/>
-          );
-      }
-      return pages;
+    let pages = [];
+    for (let index=0; index<categories.length; index++) {
+      let category = categories[index];
+      pages.push(
+        <OnLineNewsPage
+          navigator={this.props.navigator}
+          route={this.props.route}
+          categoryKey={category.key}
+          key={category.key}
+          tabLabel={category.title}/>
+      );
+    }
+    return pages;
   }
 
   _itemPressed(wxNewsBean) {
@@ -107,7 +107,7 @@ class NewsCategoryListScene extends Component {
   }
 
   _onIconClicked() {
-      NavigatorRoute.navigatorPopBack(this.props.navigator);
+    NavigatorRoute.navigatorPopBack(this.props.navigator);
   }
 }
 

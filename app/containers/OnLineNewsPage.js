@@ -35,7 +35,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import ItemOnLineNewsView from './../components/ItemOnLineNewsView';
-import { fetchNewsListByPage } from '../actions/OnLineNewsAction';
+import { fetchNewsListByPage, resetNewsListState } from '../actions/OnLineNewsAction';
 import NavigatorRoute from './../common/NavigatorRoute';
 /**
  * 分类新闻列表（上拉分页加载）
@@ -45,9 +45,9 @@ const pageLimit = 10;
 
 class OnLineNewsPage extends Component {
   static propTypes = {
-      categoryKey: React.PropTypes.string.isRequired,
-      navigator: React.PropTypes.object.isRequired,
-      route: React.PropTypes.object.isRequired,
+    categoryKey: React.PropTypes.string.isRequired,
+    navigator: React.PropTypes.object.isRequired,
+    route: React.PropTypes.object.isRequired,
   };
 
   constructor(props) {
@@ -59,33 +59,14 @@ class OnLineNewsPage extends Component {
 	  this.props.dispatch(fetchNewsListByPage(this.props.categoryKey));		
 	}
 
-  render() {
-      const { onLineNews } = this.props;
-      if (onLineNews[this.props.categoryKey]) {
-        if (onLineNews[this.props.categoryKey].state == 'pre_fetch') {
-          return (
-            <View style={{flex: 1, justifyContent: 'center', alignItems: 'center',}}>
-              <ActivityIndicator
-                animating ={true}
-                size='large'
-                color='#03a9f4'/>
-            </View>  
-          );
-        }
+  componentWillUnmount() {
+    this.props.dispatch(resetNewsListState(this.props.categoryKey));
+  }
 
-        let listData = onLineNews[this.props.categoryKey].newsList === undefined ? [] : onLineNews[this.props.categoryKey].newsList;
-        return (
-          <View style={styles.container}>
-              <ListView
-                style={styles.listview}
-                enableEmptySections={true}
-                dataSource={this.dataSource.cloneWithRows(Array.from(listData))}
-                renderRow={this._renderListItemView.bind(this)}
-                initialListSize={1}
-              />
-          </View>
-        );
-      } else {
+  render() {
+    const { onLineNews } = this.props;
+    if (onLineNews[this.props.categoryKey]) {
+      if (onLineNews[this.props.categoryKey].state == 'pre_fetch') {
         return (
           <View style={{flex: 1, justifyContent: 'center', alignItems: 'center',}}>
             <ActivityIndicator
@@ -95,6 +76,28 @@ class OnLineNewsPage extends Component {
           </View>  
         );
       }
+      
+      let listData = onLineNews[this.props.categoryKey].newsList === undefined ? [] : onLineNews[this.props.categoryKey].newsList;
+      return (
+        <View style={styles.container}>
+          <ListView
+            style={styles.listview}
+            enableEmptySections={true}
+            dataSource={this.dataSource.cloneWithRows(Array.from(listData))}
+            renderRow={this._renderListItemView.bind(this)}
+            initialListSize={1} />
+        </View>
+      );
+    } else {
+      return (
+        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center',}}>
+          <ActivityIndicator
+            animating ={true}
+            size='large'
+            color='#03a9f4'/>
+        </View>  
+      );
+    }
   }
 
   _renderListItemView(item) {
