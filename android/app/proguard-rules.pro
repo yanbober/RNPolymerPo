@@ -65,6 +65,8 @@
 -dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
 -dontwarn okio.**
 
--libraryjars libs/pgyer_sdk_x.x.jar
+# 蒲公英分发平台
+
+#-libraryjars libs/pgyer_sdk_x.x.jar
 -dontwarn com.pgyersdk.**
 -keep class com.pgyersdk.** { *; }

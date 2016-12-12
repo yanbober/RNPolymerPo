@@ -115,7 +115,7 @@ class WeiXinNewsPage extends Component {
   }
 
   _onIconClicked() {
-    
+    NavigatorRoute.navigatorPopBack(this.props.navigator);
   }
 }
 
