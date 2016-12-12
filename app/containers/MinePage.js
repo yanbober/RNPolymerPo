@@ -44,6 +44,13 @@ class MinePage extends Component {
     route: React.PropTypes.object.isRequired,
   };
 
+/**
+<ItemMineView
+    name={'本项目开源代码'}
+    itemClicked={this._pressedWebItem.bind(this, 'thisSource')}/>
+<View style={styles.divLine}/>
+ */
+
   render() {
     const { homeTopBanner } = this.props;
     return (
@@ -67,10 +74,6 @@ class MinePage extends Component {
                         itemClicked={this._pressedFeedChart.bind(this)}/>
                     <View style={styles.divLine}/>
                     <Text style={styles.itemGroupNmae}>React Native 学习资源推荐</Text>
-                    <View style={styles.divLine}/>
-                    <ItemMineView
-                        name={'本项目开源代码'}
-                        itemClicked={this._pressedWebItem.bind(this, 'thisSource')}/>
                     <View style={styles.divLine}/>
                     <ItemMineView
                         name={'React Native 开源代码'}

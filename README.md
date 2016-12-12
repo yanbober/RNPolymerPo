@@ -2,17 +2,18 @@
 
 RNPolymerPo 是一个基于 [React Native](https://github.com/facebook/react-native) 的生活类聚合实战项目，目前由于没有 MAC 设备，所以没有适配 iOS，感兴趣的可以自行适配 app 目录下相关 JS 代码即可。
 
-![home_page.png](https://github.com/yanbober/RNPolymerPo/tree/master/doc/home_page.png)
-
-![weixin_page.png](https://github.com/yanbober/RNPolymerPo/tree/master/doc/weixin_page.png)
-
-![mine_page.png](https://github.com/yanbober/RNPolymerPo/tree/master/doc/mine_page.png)
-
-![movie_page.png](https://github.com/yanbober/RNPolymerPo/tree/master/doc/movie_page.png)
-
-![chart_page.png](https://github.com/yanbober/RNPolymerPo/tree/master/doc/chart_page.png)
-
-![movie_page.png](https://github.com/yanbober/RNPolymerPo/tree/master/doc/movie_page.png)
+<div>
+    <div style="display:inline;"><img src="https://github.com/yanbober/RNPolymerPo/tree/master/doc/home_page.png" width="332"></div>
+    <div style="display:inline;"><img src="https://github.com/yanbober/RNPolymerPo/tree/master/doc/weixin_page.png" width="332"></div> 
+</div>
+<div>
+    <div style="display:inline;"><img src="https://github.com/yanbober/RNPolymerPo/tree/master/doc/mine_page.png" width="332"></div>
+    <div style="display:inline;"><img src="https://github.com/yanbober/RNPolymerPo/tree/master/doc/movie_page.png" width="332"></div> 
+</div>
+<div>
+    <div style="display:inline;"><img src="https://github.com/yanbober/RNPolymerPo/tree/master/doc/chart_page.png" width="332"></div>
+    <div style="display:inline;"><img src="https://github.com/yanbober/RNPolymerPo/tree/master/doc/movie_page.png" width="332"></div> 
+</div> 
 
 # 获取代码与编译调试打包
 
