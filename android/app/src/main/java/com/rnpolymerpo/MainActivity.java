@@ -29,7 +29,7 @@ public class MainActivity extends ReactActivity {
             // 以Activity的形式打开，这种情况下必须在AndroidManifest.xml配置FeedbackActivity
             // 打开沉浸式,默认为false
             // FeedbackActivity.setBarImmersive(true);
-            PgyFeedbackShakeManager.register(MainActivity.this, false);
+            // PgyFeedbackShakeManager.register(MainActivity.this, false);
         }
     }
 
