@@ -128,9 +128,13 @@ class WebViewScene extends Component {
 
     componentDidMount() {
         BackAndroid.addEventListener('webHardwareBackPress', () => {
-            if (this.state.backButtonEnabled) { 
-                this.refs._webView.goBack();
-                return true;
+            try {
+                if (this.state.backButtonEnabled) { 
+                    this.refs._webView.goBack();
+                    return true;
+                }
+            } catch (err) {
+                return false;
             }
             return false;
         });
